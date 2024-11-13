@@ -8,8 +8,8 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-horarios',
-  standalone: true,  // Agrega esta línea
-  imports: [HomeComponent, FormsModule, CommonModule, RouterLink],  // Aquí importa FormsModule y HomeComponent
+  standalone: true,
+  imports: [HomeComponent, FormsModule, CommonModule, RouterLink],
   templateUrl: './horarios.component.html',
   styleUrls: ['./horarios.component.scss']
 })
@@ -27,25 +27,41 @@ export class HorariosComponent implements OnInit {
     this.horariosService.getHorarios().then((querySnapshot) => {
       this.horarios = querySnapshot.docs.map(doc => {
         const data = doc.data();
-        console.log({ id: doc.id, ...data }); // Verifica los datos en la consola
         return { id: doc.id, ...data } as Horarios;
       });
     });
   }
 
   agregarHorario() {
-    if (this.nuevoHorario.dia && this.nuevoHorario.horainicio && this.nuevoHorario.horafin) {
-      this.horariosService.addHorario(this.nuevoHorario).then(() => {
-        this.nuevoHorario = { dia: '', horainicio: '', horafin: '' };
-        this.obtenerHorarios();
-      });
+    // Validación para que el campo "Día" solo contenga letras
+    const soloLetras = /^[a-zA-Z\s]+$/;
+    if (!soloLetras.test(this.nuevoHorario.dia)) {
+      alert("El campo 'Día' solo debe contener letras.");
+      return;
     }
+
+    // Validación de campos obligatorios
+    if (!this.nuevoHorario.dia || !this.nuevoHorario.horainicio || !this.nuevoHorario.horafin) {
+      alert("Por favor, complete todos los campos obligatorios.");
+      return;
+    }
+
+    // Agregar el horario y mostrar mensaje de confirmación
+    this.horariosService.addHorario(this.nuevoHorario).then(() => {
+      alert("Horario agregado exitosamente.");
+      this.nuevoHorario = { dia: '', horainicio: '', horafin: '' };
+      this.obtenerHorarios();
+    }).catch((error: any) => {
+      console.error('Error al agregar el horario:', error);
+    });
   }
 
   eliminarHorario(id: string | undefined) {
     if (id) {
       this.horariosService.deleteHorario(id).then(() => {
         this.obtenerHorarios();
+      }).catch((error: any) => {
+        console.error('Error al eliminar el horario:', error);
       });
     } else {
       console.error('Error: El ID del horario es undefined.');
@@ -53,6 +69,6 @@ export class HorariosComponent implements OnInit {
   }
 
   trackById(index: number, horario: Horarios): string {
-    return horario.id ? horario.id : index.toString(); // Usa el índice si `id` no está presente
+    return horario.id ? horario.id : index.toString();
   }
 }

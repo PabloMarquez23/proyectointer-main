@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-tarifas',
-  standalone: true,  // Agrega esta línea
-  imports: [HomeComponent, FormsModule,CommonModule,RouterLink],  // Aquí importa FormsModule y HomeComponent
+  standalone: true,
+  imports: [HomeComponent, FormsModule, CommonModule, RouterLink],
   templateUrl: './tarifas.component.html',
   styleUrls: ['./tarifas.component.scss']
 })
@@ -28,32 +27,30 @@ export class TarifasComponent implements OnInit {
     this.tarifasService.getTarifas().then((querySnapshot) => {
       this.tarifas = querySnapshot.docs.map(doc => {
         const data = doc.data();
-        console.log({ id: doc.id, ...data }); // Verifica los datos en la consola
         return { id: doc.id, ...data } as Tarifas;
       });
     });
   }
 
   agregarTarifa() {
-    if (this.nuevaTarifa.nombretarifa && this.nuevaTarifa.costo >= 0 && this.nuevaTarifa.duracion >= 0) {
-      this.tarifasService.addTarifa(this.nuevaTarifa).then(() => {
-        this.nuevaTarifa = { nombretarifa: '', costo: 0, duracion: 0 };
-        this.obtenerTarifas();
-      });
+    // Validar que el campo nombretarifa no tenga números
+    const tieneNumeros = /\d/.test(this.nuevaTarifa.nombretarifa);
+    if (tieneNumeros) {
+      alert("El nombre de la tarifa no debe contener números.");
+      return;
     }
-  }
 
-  eliminarTarifa(id: string | undefined) {
-    if (id) {
-      this.tarifasService.deleteTarifa(id).then(() => {
-        this.obtenerTarifas();
-      });
-    } else {
-      console.error('Error: El ID de la tarifa es undefined.');
+    // Validar que todos los campos sean obligatorios y válidos
+    if (!this.nuevaTarifa.nombretarifa || this.nuevaTarifa.costo <= 0 || this.nuevaTarifa.duracion <= 0) {
+      alert("Por favor, complete todos los campos obligatorios con valores válidos.");
+      return;
     }
-  }
 
-  trackById(index: number, tarifa: Tarifas): string {
-    return tarifa.id ? tarifa.id : index.toString(); // Usa el índice si `id` no está presente
+    // Guardar la tarifa y mostrar mensaje de confirmación
+    this.tarifasService.addTarifa(this.nuevaTarifa).then(() => {
+      this.nuevaTarifa = { nombretarifa: '', costo: 0, duracion: 0 };
+      this.obtenerTarifas();
+      alert("Tarifa guardada exitosamente.");
+    });
   }
 }

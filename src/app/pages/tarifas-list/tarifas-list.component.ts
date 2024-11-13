@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-tarifas-list',
   standalone: true,
-  imports: [FormsModule, CommonModule,RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './tarifas-list.component.html',
   styleUrls: ['./tarifas-list.component.scss']
 })
@@ -31,13 +31,28 @@ export class TarifasListComponent implements OnInit {
   }
 
   actualizarTarifa(tarifa: Tarifas) {
-    if (tarifa.id) {
+    // Validar que el nombre de la tarifa no contenga números
+    const tieneNumeros = /\d/.test(tarifa.nombretarifa);
+    if (tieneNumeros) {
+      alert("El nombre de la tarifa no debe contener números.");
+      return;
+    }
+
+    // Validar que todos los campos sean obligatorios y válidos
+    if (!tarifa.nombretarifa || tarifa.costo <= 0 || tarifa.duracion <= 0) {
+      alert("Por favor, complete todos los campos obligatorios con valores válidos.");
+      return;
+    }
+
+    // Confirmación de actualización
+    const confirmacion = confirm("¿Estás seguro de que deseas actualizar esta tarifa?");
+    if (confirmacion && tarifa.id) {
       this.tarifasService.updateTarifa(tarifa.id, {
         nombretarifa: tarifa.nombretarifa,
         costo: tarifa.costo,
         duracion: tarifa.duracion
       }).then(() => {
-        console.log('Tarifa actualizada');
+        alert("Tarifa actualizada exitosamente.");
       }).catch((error: any) => {
         console.error('Error al actualizar la tarifa:', error);
       });
@@ -46,9 +61,16 @@ export class TarifasListComponent implements OnInit {
 
   eliminarTarifa(id: string | undefined) {
     if (id) {
-      this.tarifasService.deleteTarifa(id).then(() => {
-        this.obtenerTarifas();
-      });
+      // Confirmación de eliminación
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta tarifa?");
+      if (confirmacion) {
+        this.tarifasService.deleteTarifa(id).then(() => {
+          this.obtenerTarifas();
+          alert("Tarifa eliminada exitosamente.");
+        }).catch((error: any) => {
+          console.error('Error al eliminar la tarifa:', error);
+        });
+      }
     } else {
       console.error('Error: El ID de la tarifa es undefined.');
     }

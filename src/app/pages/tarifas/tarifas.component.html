@@ -8,17 +8,38 @@
 
     <div class="grupo-form mb-3">
       <label for="nombretarifa">Nombre de la Tarifa:</label>
-      <input type="text" id="nombretarifa" placeholder="Escribe el nombre de la tarifa..." [(ngModel)]="nuevaTarifa.nombretarifa" class="campo-formulario">
+      <input 
+        type="text" 
+        id="nombretarifa" 
+        placeholder="Escribe el nombre de la tarifa..." 
+        [(ngModel)]="nuevaTarifa.nombretarifa" 
+        class="campo-formulario"
+        required
+      >
     </div>
 
     <div class="grupo-form mb-3">
       <label for="costo">Costo:</label>
-      <input type="number" id="costo" placeholder="Ingrese el costo..." [(ngModel)]="nuevaTarifa.costo" class="campo-formulario">
+      <input 
+        type="number" 
+        id="costo" 
+        placeholder="Ingrese el costo..." 
+        [(ngModel)]="nuevaTarifa.costo" 
+        class="campo-formulario"
+        required
+      >
     </div>
 
     <div class="grupo-form mb-3">
       <label for="duracion">Duración (en días):</label>
-      <input type="number" id="duracion" placeholder="Ingrese la duración en días..." [(ngModel)]="nuevaTarifa.duracion" class="campo-formulario">
+      <input 
+        type="number" 
+        id="duracion" 
+        placeholder="Ingrese la duración en días..." 
+        [(ngModel)]="nuevaTarifa.duracion" 
+        class="campo-formulario"
+        required
+      >
     </div>
 
     <button (click)="agregarTarifa()" class="btn-primario">Agregar Tarifa</button>
