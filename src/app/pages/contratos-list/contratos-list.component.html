@@ -1,45 +1,45 @@
 <div class="contenedor-principal">
   <div class="contenedor">
     <h2 class="centrar-texto mb-4">Listado de Contratos</h2>
-  
+
     <ul>
       <li *ngFor="let contrato of contratos; trackBy: trackById" class="grupo-form mb-4">
         <div>
           <strong>Cliente:</strong> {{ contrato.cliente }}
-          <input type="text" [(ngModel)]="contrato.cliente" placeholder="Editar cliente" class="campo-formulario">
+          <input type="text" [(ngModel)]="contrato.cliente" placeholder="Editar cliente" class="campo-formulario" required>
         </div>
-  
+
         <div>
           <strong>Dirección:</strong> {{ contrato.direccion }}
-          <input type="text" [(ngModel)]="contrato.direccion" placeholder="Editar dirección" class="campo-formulario">
+          <input type="text" [(ngModel)]="contrato.direccion" placeholder="Editar dirección" class="campo-formulario" required>
         </div>
-  
+
         <div>
           <strong>Fecha de Inicio:</strong> {{ contrato.fechaInicio | date }}
-          <input type="date" [(ngModel)]="contrato.fechaInicio" class="campo-formulario">
+          <input type="date" [(ngModel)]="contrato.fechaInicio" class="campo-formulario" required>
         </div>
-  
+
         <div>
           <strong>Fecha de Fin:</strong> {{ contrato.fechaFin | date }}
-          <input type="date" [(ngModel)]="contrato.fechaFin" class="campo-formulario">
+          <input type="date" [(ngModel)]="contrato.fechaFin" class="campo-formulario" required>
         </div>
-  
+
         <div>
           <strong>Número de Espacio:</strong> {{ contrato.numeroespacio }}
-          <input type="text" [(ngModel)]="contrato.numeroespacio" placeholder="Editar número de espacio" class="campo-formulario">
+          <input type="text" [(ngModel)]="contrato.numeroespacio" placeholder="Editar número de espacio" class="campo-formulario" required>
         </div>
-  
+
         <div>
           <strong>Monto Mensual:</strong> {{ contrato.montoMensual | currency }}
-          <input type="number" [(ngModel)]="contrato.montoMensual" placeholder="Editar monto mensual" class="campo-formulario">
+          <input type="number" [(ngModel)]="contrato.montoMensual" placeholder="Editar monto mensual" class="campo-formulario" required>
         </div>
-  
+
         <button (click)="actualizarContrato(contrato)" class="btn-primario">Actualizar</button>
         <button (click)="eliminarContrato(contrato.id)" class="btn-primario">Eliminar</button>
         <hr>
       </li>
     </ul>
-    
+
     <button [routerLink]="['/contratos']" class="btn-primario btn-regresar">Regresar</button>
   </div>
 </div>
