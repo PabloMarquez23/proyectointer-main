@@ -1,0 +1,31 @@
+<div class="contenedor-principal">
+  <div class="contenedor">
+    <h2 class="centrar-texto mb-4">Listado de Horarios</h2>
+  
+    <ul>
+      <li *ngFor="let horario of horarios; trackBy: trackById" class="grupo-form mb-4">
+        <div>
+          <strong>Día:</strong> {{ horario.dia }}
+          <input type="text" [(ngModel)]="horario.dia" placeholder="Editar día" class="campo-formulario">
+        </div>
+    
+        <div>
+          <strong>Hora de Inicio:</strong> {{ horario.horainicio }}
+          <input type="time" [(ngModel)]="horario.horainicio" placeholder="Editar hora de inicio" class="campo-formulario">
+        </div>
+    
+        <div>
+          <strong>Hora de Fin:</strong> {{ horario.horafin }}
+          <input type="time" [(ngModel)]="horario.horafin" placeholder="Editar hora de fin" class="campo-formulario">
+        </div>
+    
+        <button (click)="actualizarHorario(horario)" class="btn-primario">Actualizar</button>
+        <button (click)="eliminarHorario(horario.id)" class="btn-primario">Eliminar</button>
+        <hr>
+      </li>
+    </ul>
+  
+    <!-- Botón para regresar a la página de agregar horarios -->
+    <button [routerLink]="['/horarios']" class="btn-primario">Regresar</button>
+  </div>
+</div>

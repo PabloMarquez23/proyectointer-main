@@ -1,0 +1,148 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.contenedor-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo con transparencia */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra para un toque moderno */
+}
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Asegura que todo esté centrado vertical y horizontalmente */
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.tarjeta {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.grupo-form {
+  margin-bottom: 20px;
+}
+
+.grupo-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+.grupo-form input {
+  width: 100%; /* Ocupa el 100% del contenedor */
+  padding: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.grupo-form input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.btn-primario {
+  width: 850px;
+  max-width: 1000px;
+  background-color: #b04f4f;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-primario:hover {
+  background-color: #357ab7;
+}
+
+ul {
+  padding: 0;
+  list-style: none; /* Quita los puntos de lista */
+}
+
+li.grupo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaciado entre los campos del contrato */
+  margin-bottom: 25px;
+}
+
+li.grupo-form strong {
+  font-weight: bold;
+  color: #333;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #f44336; /* Rojo para el botón de eliminar */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+button:hover {
+  background-color: #e53935;
+}
+
+button:focus {
+  outline: none;
+}
+
+button[routerLink] {
+  background-color: #4a90e2; /* Azul para el botón de regresar */
+  width: auto;
+  padding: 5px 0px;
+  font-size: 16px;
+  margin-top: 0px; /* Reduce el margen superior */
+}
+
+button[routerLink]:hover {
+  background-color: #357ab7;
+}
+
+.btn-regresar {
+  align-self: center; /* Asegura que el botón de regreso esté centrado */
+  margin-top: 20px; /* Ajuste el margen superior para reducir el espacio */
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 0px 0;
+}

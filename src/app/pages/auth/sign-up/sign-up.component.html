@@ -1,0 +1,82 @@
+<div class="form">
+  <div class="form__container">
+    <!-- Título del formulario -->
+    <h1 class="small-text-log-in-redirect">Sign up</h1>
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="signUp()">
+      <!-- Campo para los nombres -->
+      <div>
+        <mat-form-field>
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="names" />
+          <!-- Mensaje de error si el campo está vacío -->
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Campo para los apellidos -->
+      <div>
+        <mat-form-field>
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastName" />
+          <!-- Mensaje de error si el campo está vacío -->
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Campo para el correo electrónico -->
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+          <!-- Mensaje de error si el correo electrónico no es válido -->
+          <mat-error *ngIf="isEmailValid as messsage">{{ messsage }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Campo para la contraseña -->
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <!-- Input de tipo contraseña -->
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <!-- Botón para alternar la visibilidad de la contraseña -->
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <!-- Ícono para mostrar o ocultar la contraseña -->
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <!-- Mensaje de error si el campo está vacío -->
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Botón para enviar el formulario -->
+      <div>
+        <button mat-flat-button color="accent" type="submit">Sign up</button>
+      </div>
+    </form>
+
+    <!-- Separador horizontal -->
+    <hr />
+
+    <!-- Texto para registrarse con Google o GitHub -->
+    <span class="small-text-providers">Have Google or GitHub?</span>
+    <!-- Componente para registrar con Google o GitHub -->
+    <app-button-providers />
+
+    <!-- Texto para redireccionar a iniciar sesión -->
+    <span class="small-text-log-in-redirect">
+      Already have an account? <a routerLink="/auth/log-in">Log in</a>
+    </span>
+  </div>
+</div>

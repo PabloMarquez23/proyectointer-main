@@ -1,0 +1,41 @@
+<header>
+  <app-home></app-home>
+</header>
+
+<div class="contenedor">
+  <h2 class="centrar-texto mb-4">Editar Usuarios</h2>
+
+  @for (user of task; track user.id) {
+    <div class="tarjeta">
+      <div class="form-row">
+        <div class="form-container">
+          <label for="editar-email-{{user.id}}">Correo Electrónico:</label>
+          <li><strong>Email:</strong> {{user.email}}</li>
+          <input type="text" class="campo-formulario" id="editar-email-{{user.id}}"
+                 [(ngModel)]="user.email" placeholder="Escribe el correo electrónico...">
+        </div>
+        <div class="form-container">
+          <label for="editar-lastname-{{user.id}}">Apellido:</label>
+          <li><span><strong>Apellido:</strong> {{user.lastName}}</span></li>
+          <input type="text" class="campo-formulario" id="editar-lastname-{{user.id}}"
+                 [(ngModel)]="user.lastName" placeholder="Ingrese el apellido">
+        </div>
+        <div class="form-container">
+          <label for="editar-names-{{user.id}}">Nombre:</label>
+          <li><span><strong>Nombre:</strong> {{user.names}}</span></li>
+          <input type="text" class="campo-formulario" id="editar-names-{{user.id}}"
+                 [(ngModel)]="user.names" placeholder="Ingrese el nombre">
+        </div>
+        <div class="form-container">
+          <label for="editar-role-{{user.id}}">Rol:</label>
+          <li><span><strong>Rol:</strong> {{user.role}}</span></li>
+          <textarea class="campo-formulario" id="editar-role-{{user.id}}" rows="1"
+                    [(ngModel)]="user.role" placeholder="Ingrese el rol"></textarea>
+        </div>
+      </div>
+      <button (click)="editarUsuario(user)" class="btn-primario">Guardar Cambios</button>
+      <button (click)="borrar(user.id)" class="btn-secundario">Eliminar</button>
+    </div>
+    
+  }
+</div>

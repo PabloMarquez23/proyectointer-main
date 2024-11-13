@@ -1,0 +1,58 @@
+body {
+    background-color: #1c1c1c; /* Fondo oscuro para toda la página */
+  }
+  
+  .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrado vertical completo */
+  }
+  
+  .tarjeta {
+    max-width: 600px; /* Ancho máximo para la tarjeta, más grande */
+    width: 100%; /* Ancho completo en pantallas pequeñas */
+    padding: 2rem;
+    background-color: #333; /* Fondo de la tarjeta */
+    color: #fff; /* Color del texto */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra */
+  }
+  
+  .campo-formulario {
+    background-color: #555; /* Fondo de los campos de entrada */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin bordes */
+    width: 100%; /* Ancho completo */
+    padding: 0.5rem; /* Relleno interno */
+    margin-bottom: 1rem; /* Margen inferior */
+  }
+  
+  .campo-formulario:focus {
+    box-shadow: none; /* Quitar sombra al enfocar */
+  }
+  
+  .btn-primario {
+    background-color: #007bff; /* Color azul para el botón */
+    border-color: #007bff; /* Bordes azul */
+    color: #fff; /* Texto blanco */
+    padding: 0.75rem; /* Relleno interno */
+    width: 100%;
+    border: none; /* Sin bordes */
+    cursor: pointer; /* Manita al pasar el cursor */
+  }
+  
+  .btn-primario:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+  }
+  
+  .centrar-texto {
+    text-align: center; /* Alinear texto al centro */
+  }
+  
+  .mb-3 {
+    margin-bottom: 1rem; /* Margen inferior para los grupos de formulario */
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem; /* Margen inferior más grande para el último grupo de formulario */
+  }

@@ -1,0 +1,17 @@
+<header class="header">
+  <nav class="header_nav">
+    <ul class="header__ul">
+      <li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/gestionespacios'">GESTIÓN DE ESPACIOS</a></li>
+      <li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/contratos'">CONTRATO</a></li>
+      <li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/tarifas'">TARIFAS</a></li>
+      <li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/horarios'">HORARIOS</a></li>
+      <li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/usuarios'">USUARIOS</a></li>
+      <!--<li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/anadir'">EDITAR USUARIO</a></li>-->
+      <li class="header__li"><a [routerLink]="'/edi-perfil'">Actualizar Perfil</a></li>
+      <button mat-flat-button (click)="logOut()">Log out</button>
+    </ul>
+  </nav>
+</header>
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
