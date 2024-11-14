@@ -109,8 +109,4 @@ this.recargarPagina();
   }
   
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9d83ba0e3d49ef5fdf00175bfeae9cbd7709bfe7
