@@ -35,31 +35,54 @@ export class ContratosComponent implements OnInit {
     this.contratosService.getContratos().then((querySnapshot) => {
       this.contratos = querySnapshot.docs.map(doc => {
         const data = doc.data();
-        console.log({ id: doc.id, ...data });
         return { id: doc.id, ...data } as Contratos;
       });
     });
   }
 
   agregarContrato() {
-    if (this.nuevoContrato.cliente && this.nuevoContrato.numeroespacio && this.nuevoContrato.montoMensual >= 0) {
-      this.contratosService.addContrato(this.nuevoContrato).then(() => {
-        this.nuevoContrato = {
-          cliente: '',
-          placa: '',
-          fechaInicio: new Date(),
-          fechaFin: new Date(),
-          numeroespacio: '',
-          montoMensual: 0,
-          estado: 'Disponible'  // Asegúrate de que este campo esté configurado
-        };
-        this.obtenerContratos();
-      }).catch(error => {
-        console.error('Error al agregar contrato:', error);
-      });
-    } else {
-      console.warn('Por favor, completa todos los campos obligatorios.');
+    // Validación de campos
+    if (!this.nuevoContrato.cliente || !this.nuevoContrato.placa || !this.nuevoContrato.numeroespacio || !this.nuevoContrato.montoMensual) {
+      alert('Por favor, completa todos los campos obligatorios.');
+      return;
     }
+
+    // Validación del nombre (no debe contener números)
+    const nombreValido = /^[A-Za-z\s]+$/.test(this.nuevoContrato.cliente);
+    if (!nombreValido) {
+      alert('El nombre del cliente no debe contener números.');
+      return;
+    }
+
+    // Validación de espacio (debe ser un número)
+    const numeroEspacioValido = /^[0-9]+$/.test(this.nuevoContrato.numeroespacio);
+    if (!numeroEspacioValido) {
+      alert('El número de espacio debe ser un número válido.');
+      return;
+    }
+
+    // Validación de monto mensual (debe ser mayor o igual a cero)
+    if (this.nuevoContrato.montoMensual < 0) {
+      alert('El monto mensual no puede ser negativo.');
+      return;
+    }
+
+    // Agregar el contrato si las validaciones pasan
+    this.contratosService.addContrato(this.nuevoContrato).then(() => {
+      alert('Contrato agregado exitosamente.');
+      this.nuevoContrato = {
+        cliente: '',
+        placa: '',
+        fechaInicio: new Date(),
+        fechaFin: new Date(),
+        numeroespacio: '',
+        montoMensual: 0,
+        estado: 'Disponible'
+      };
+      this.obtenerContratos();
+    }).catch(error => {
+      console.error('Error al agregar contrato:', error);
+    });
   }
 
   eliminarContrato(id: string | undefined) {

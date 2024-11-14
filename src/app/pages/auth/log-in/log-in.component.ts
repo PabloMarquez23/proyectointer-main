@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 
-
 import {
   FormBuilder,
   FormControl,
@@ -8,7 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
 
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -22,8 +20,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { ButtonProvidersComponent } from '../components/button-providers/button-providers.component';
 
-
-
 interface LogInForm {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -33,7 +29,6 @@ interface LogInForm {
   selector: 'app-log-in',
   standalone: true,
   imports: [
-
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -42,28 +37,20 @@ interface LogInForm {
     RouterModule,
     NgIf,
     MatSnackBarModule,
-    ButtonProvidersComponent
-
-
-
+    ButtonProvidersComponent,
   ],
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrl: './log-in.component.scss',
 })
 
-export default class LogInComponent  {
-
+export default class LogInComponent {
 
   hide = true;
-  constructor(){}
-
+  constructor() {}
 
   formBuilder = inject(FormBuilder);
-
   private authService = inject(AuthService);
-
   private router = inject(Router);
-
   private _snackBar = inject(MatSnackBar);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
@@ -79,13 +66,12 @@ export default class LogInComponent  {
 
   get isEmailValid(): string | boolean {
     const control = this.form.get('email');
-
     const isInvalid = control?.invalid && control.touched;
 
     if (isInvalid) {
       return control.hasError('required')
-        ? 'This field is required'
-        : 'Enter a valid email';
+        ? 'ESTE CAMPO ES OBLIGATORIO'
+        : 'INGRESE UN EMAIL VALIDO';
     }
 
     return false;
@@ -101,21 +87,14 @@ export default class LogInComponent  {
 
     try {
       await this.authService.logInWithEmailAndPassword(credential);
-      const snackBarRef = this.openSnackBar();
-
-      snackBarRef.afterDismissed().subscribe(() => {
-        this.router.navigateByUrl('/');
-      });
+      this.openAlert('Ingreso exitoso'); // Cambiado para mostrar una alerta
+      this.router.navigateByUrl('/');
     } catch (error) {
-      console.error(error);
+      this.openAlert('Error al iniciar sesión: ' + error); // Cambiado para mostrar un error en alerta
     }
   }
 
-  openSnackBar() {
-    return this._snackBar.open('Succesfully Log in ', 'Close', {
-      duration: 2500,
-      verticalPosition: 'top',
-      horizontalPosition: 'end',
-    });
+  openAlert(message: string): void {
+    alert(message); // Muestra un mensaje de alerta al usuario
   }
 }

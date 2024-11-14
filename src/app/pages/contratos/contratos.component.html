@@ -2,59 +2,58 @@
   <app-home></app-home>
 </header>
 
-<div class="contenedor">
-  <div class="tarjeta">
-    <h2 class="centrar-texto mb-4">Gestión de Contratos</h2>
+<div class="contenedor-principal">
+  <div class="contenedor">
+    <div class="tarjeta">
+      <h2 class="centrar-texto mb-4">Gestión de Contratos</h2>
 
-    <div class="grupo-form mb-3">
-      <label for="cliente">Cliente:</label>
-      <input type="text" id="cliente" placeholder="Nombre del cliente..." [(ngModel)]="nuevoContrato.cliente" class="campo-formulario">
+      <div class="grupo-form mb-3">
+        <label for="cliente">Cliente:</label>
+        <input type="text" id="cliente" placeholder="Nombre del cliente..." [(ngModel)]="nuevoContrato.cliente" class="campo-formulario">
+      </div>
+
+      <!-- Campo adicional: Placa -->
+      <div class="grupo-form mb-3">
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" placeholder="Placa del vehículo..." [(ngModel)]="nuevoContrato.placa" class="campo-formulario">
+      </div>
+
+      <div class="grupo-form mb-3">
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" [(ngModel)]="nuevoContrato.fechaInicio" class="campo-formulario">
+      </div>
+
+      <div class="grupo-form mb-3">
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="date" id="fechaFin" [(ngModel)]="nuevoContrato.fechaFin" class="campo-formulario">
+      </div>
+
+      <div class="grupo-form mb-3">
+        <label for="numeroespacio">Número de Espacio:</label>
+        <input type="text" id="numeroespacio" placeholder="Número de espacio..." [(ngModel)]="nuevoContrato.numeroespacio" class="campo-formulario">
+      </div>
+
+      <div class="grupo-form mb-3">
+        <label for="montoMensual">Monto Mensual:</label>
+        <input type="number" id="montoMensual" placeholder="Monto mensual..." [(ngModel)]="nuevoContrato.montoMensual" class="campo-formulario">
+      </div>
+
+      <!-- Campo adicional: Estado -->
+      <div class="grupo-form mb-3">
+        <label for="estado">Estado:</label>
+        <select id="estado" [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
+          <option value="Disponible">Disponible</option>
+          <option value="Ocupado">Ocupado</option>
+        </select>
+      </div>
+
+      <!-- Botón para agregar contrato -->
+      <button (click)="agregarContrato()" class="btn-primario">Agregar Contrato</button>
+
+      <hr>
+
+      <!-- Enlace para ver el listado de contratos -->
+      <button [routerLink]="['/contratos-list']" class="btn-primario">Ver Listado de Contratos</button>
     </div>
-
-     <!-- Campo adicional: Placa -->
-     <div class="grupo-form mb-3">
-      <label for="placa">Placa:</label>
-      <input type="text" id="placa" placeholder="Placa del vehículo..." [(ngModel)]="nuevoContrato.placa" class="campo-formulario">
-    </div>
-
-    <div class="grupo-form mb-3">
-      <label for="fechaInicio">Fecha de Inicio:</label>
-      <input type="date" id="fechaInicio" [(ngModel)]="nuevoContrato.fechaInicio" class="campo-formulario">
-    </div>
-
-    <div class="grupo-form mb-3">
-      <label for="fechaFin">Fecha de Fin:</label>
-      <input type="date" id="fechaFin" [(ngModel)]="nuevoContrato.fechaFin" class="campo-formulario">
-    </div>
-
-    <div class="grupo-form mb-3">
-      <label for="numeroespacio">Número de Espacio:</label>
-      <input type="text" id="numeroespacio" placeholder="Número de espacio..." [(ngModel)]="nuevoContrato.numeroespacio" class="campo-formulario">
-    </div>
-
-    <div class="grupo-form mb-3">
-      <label for="montoMensual">Monto Mensual:</label>
-      <input type="number" id="montoMensual" placeholder="Monto mensual..." [(ngModel)]="nuevoContrato.montoMensual" class="campo-formulario">
-    </div>
-
-    
-
-    <!-- Campo adicional: Estado -->
-    <div class="grupo-form mb-3">
-      <label for="estado">Estado:</label>
-      <select id="estado" [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
-        <option value="Disponible">Disponible</option>
-        <option value="Ocupado">Ocupado</option>
-
-      </select>
-    </div>
-
-    <!-- Botón para agregar contrato -->
-    <button (click)="agregarContrato()" class="btn-primario">Agregar Contrato</button>
-
-    <hr>
-
-    <!-- Enlace para ver el listado de contratos -->
-    <button [routerLink]="['/contratos-list']" class="btn-primario">Ver Listado de Contratos</button>
   </div>
 </div>
