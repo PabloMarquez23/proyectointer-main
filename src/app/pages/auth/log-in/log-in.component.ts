@@ -1,6 +1,4 @@
 import { Component, inject } from '@angular/core';
-
-
 import {
   FormBuilder,
   FormControl,
@@ -8,21 +6,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
-
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { ButtonProvidersComponent } from '../components/button-providers/button-providers.component';
-
-
 
 interface LogInForm {
   email: FormControl<string>;
@@ -33,7 +25,6 @@ interface LogInForm {
   selector: 'app-log-in',
   standalone: true,
   imports: [
-
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -42,28 +33,19 @@ interface LogInForm {
     RouterModule,
     NgIf,
     MatSnackBarModule,
-    ButtonProvidersComponent
-
-
-
+    ButtonProvidersComponent,
   ],
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrls: ['./log-in.component.scss'],
 })
-
-export default class LogInComponent  {
-
-
+export default class LogInComponent {
   hide = true;
-  constructor(){}
 
+  constructor() {}
 
   formBuilder = inject(FormBuilder);
-
   private authService = inject(AuthService);
-
   private router = inject(Router);
-
   private _snackBar = inject(MatSnackBar);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
@@ -77,22 +59,31 @@ export default class LogInComponent  {
     }),
   });
 
-  get isEmailValid(): string | boolean {
+  get isEmailInvalid(): boolean {
     const control = this.form.get('email');
+    return !!control?.invalid && control.touched;
+  }
 
-    const isInvalid = control?.invalid && control.touched;
+  get isPasswordInvalid(): boolean {
+    const control = this.form.get('password');
+    return !!control?.invalid && control.touched;
+  }
 
-    if (isInvalid) {
-      return control.hasError('required')
-        ? 'This field is required'
-        : 'Enter a valid email';
+  getEmailErrorMessage(): string {
+    const control = this.form.get('email');
+    if (control?.hasError('required')) {
+      return 'This field is required';
+    } else if (control?.hasError('email')) {
+      return 'Enter a valid email';
     }
-
-    return false;
+    return '';
   }
 
   async logIn(): Promise<void> {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();  // Ensure all errors are displayed
+      return;
+    }
 
     const credential: Credential = {
       email: this.form.value.email || '',
@@ -108,11 +99,24 @@ export default class LogInComponent  {
       });
     } catch (error) {
       console.error(error);
+      if (this.isUserNotFoundError(error)) {
+        this.openSnackBar('User not found, please register');
+      } else {
+        this.openSnackBar('An error occurred, please try again');
+      }
     }
   }
 
-  openSnackBar() {
-    return this._snackBar.open('Succesfully Log in ', 'Close', {
+  isUserNotFoundError(error: unknown): boolean {
+    if (error instanceof Error) {
+      // Puedes ajustar esta lógica según cómo se manejan los mensajes de error en tu servicio de autenticación
+      return error.message.includes('user-not-found');
+    }
+    return false;
+  }
+
+  openSnackBar(message: string = 'Successfully logged in'): any {
+    return this._snackBar.open(message, 'Close', {
       duration: 2500,
       verticalPosition: 'top',
       horizontalPosition: 'end',
