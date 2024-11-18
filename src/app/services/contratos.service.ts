@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';
 import { Contratos } from '../domain/contratos';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,11 @@ export class ContratosService {
 
   deleteContrato(id: string) {
     return deleteDoc(doc(this.firestore, this.collectionName, id));
+  }
+
+  //conectado a la gestion espacios
+  obtenerContratos(): Observable<any[]> {
+    const contratosCollection = collection(this.firestore, this.collectionName);
+    return collectionData(contratosCollection) as Observable<any[]>;
   }
 }
