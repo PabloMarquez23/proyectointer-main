@@ -35,7 +35,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()), provideFirebaseApp(() => initializeApp({"projectId":"cssproyecto-7230a",
       "appId":"1:744363798870:web:4150db232b9782ddcda6f7","storageBucket":"cssproyecto-7230a.firebasestorage.app",
       "apiKey":"AIzaSyDcrr23oReGp6mfWEogkf5uolg6Q4KcEfM","authDomain":"cssproyecto-7230a.firebaseapp.com",
-      "messagingSenderId":"744363798870"})), provideAuth(() => getAuth()), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({"projectId":"cssproyecto-7230a","appId":"1:744363798870:web:4150db232b9782ddcda6f7","storageBucket":"cssproyecto-7230a.firebasestorage.app","apiKey":"AIzaSyDcrr23oReGp6mfWEogkf5uolg6Q4KcEfM","authDomain":"cssproyecto-7230a.firebaseapp.com","messagingSenderId":"744363798870"})), provideAuth(() => getAuth()), provideFirebaseApp(() => initializeApp({"projectId":"cssproyecto-7230a","appId":"1:744363798870:web:4150db232b9782ddcda6f7","storageBucket":"cssproyecto-7230a.firebasestorage.app","apiKey":"AIzaSyDcrr23oReGp6mfWEogkf5uolg6Q4KcEfM","authDomain":"cssproyecto-7230a.firebaseapp.com","messagingSenderId":"744363798870"})), provideAuth(() => getAuth())
-  ]
+      "messagingSenderId":"744363798870"})), provideAuth(() => getAuth()), provideAnimationsAsync()]
 };
 
