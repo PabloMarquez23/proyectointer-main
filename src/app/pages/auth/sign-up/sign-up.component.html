@@ -10,7 +10,9 @@
           <mat-label>Nombres</mat-label>
           <input matInput formControlName="names" />
           <!-- Mensaje de error si el campo está vacío -->
-          <mat-error>This field is required</mat-error>
+          <mat-error *ngIf="form.get('names')?.invalid && form.get('names')?.touched">
+            {{ namesErrorMessage }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -20,7 +22,9 @@
           <mat-label>Apellidos</mat-label>
           <input matInput formControlName="lastName" />
           <!-- Mensaje de error si el campo está vacío -->
-          <mat-error>This field is required</mat-error>
+          <mat-error *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+            {{ lastNameErrorMessage }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -30,7 +34,9 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
           <!-- Mensaje de error si el correo electrónico no es válido -->
-          <mat-error *ngIf="isEmailValid as messsage">{{ messsage }}</mat-error>
+          <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            {{ emailErrorMessage }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -55,8 +61,10 @@
             <!-- Ícono para mostrar o ocultar la contraseña -->
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
-          <!-- Mensaje de error si el campo está vacío -->
-          <mat-error>This field is required</mat-error>
+          <!-- Mensaje de error si la contraseña no cumple con los requisitos -->
+          <mat-error *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            {{ passwordErrorMessage }}
+          </mat-error>
         </mat-form-field>
       </div>
 

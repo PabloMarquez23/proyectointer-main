@@ -55,7 +55,7 @@ export default class SignUpComponent {
       nonNullable: true,
     }),
     password: this.formBuilder.control('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(6)],
       nonNullable: true,
     }),
     role: this.formBuilder.control('visitor' as 'visitor' | 'admin', {
@@ -68,23 +68,57 @@ export default class SignUpComponent {
   private _router = inject(Router);
   private _snackBar = inject(MatSnackBar);
 
-  get isEmailValid(): string | boolean {
-    const control = this.form.get('email');
-    const isInvalid = control?.invalid && control.touched;
-    if (isInvalid) {
-      return control.hasError('required') ? 'This field is required' : 'Enter a valid email';
+  // Métodos de validación con mensajes específicos para cada campo
+
+  get namesErrorMessage(): string {
+    const control = this.form.get('names');
+    if (control?.hasError('required')) {
+      return 'El campo "Nombre" es obligatorio.';
     }
-    return false;
+    return '';
+  }
+
+  get lastNameErrorMessage(): string {
+    const control = this.form.get('lastName');
+    if (control?.hasError('required')) {
+      return 'El campo "Apellido" es obligatorio.';
+    }
+    return '';
+  }
+
+  get emailErrorMessage(): string {
+    const control = this.form.get('email');
+    if (control?.hasError('required')) {
+      return 'El campo "Correo electrónico" es obligatorio.';
+    }
+    if (control?.hasError('email')) {
+      return 'Ingrese un correo electrónico válido.';
+    }
+    return '';
+  }
+
+  get passwordErrorMessage(): string {
+    const control = this.form.get('password');
+    if (control?.hasError('required')) {
+      return 'El campo "Contraseña" es obligatorio.';
+    }
+    if (control?.hasError('minlength')) {
+      return 'La contraseña debe tener al menos 6 caracteres.';
+    }
+    return '';
   }
 
   async signUp(): Promise<void> {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.openSnackBar('Por favor, complete todos los campos correctamente antes de continuar.', 'Cerrar');
+      return;
+    }
   
     const credential: Credential = {
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };
-    const role = this.form.value.role ?? 'visitor'; // Asegura que role nunca sea undefined
+    const role = this.form.value.role ?? 'visitor';
   
     const additionalData = {
       names: this.form.value.names,
@@ -94,20 +128,16 @@ export default class SignUpComponent {
   
     try {
       await this.authService.signUpWithEmailAndPassword(credential, role, additionalData);
-  
-      const snackBarRef = this.openSnackBar();
-      snackBarRef.afterDismissed().subscribe(() => {
-        this._router.navigateByUrl('/');
-      });
+      this.openSnackBar('Perfil creado con éxito.', 'Cerrar');
+      this._router.navigateByUrl('/');
     } catch (error) {
       console.error(error);
+      this.openSnackBar('Error al crear el perfil. Intente nuevamente.', 'Cerrar');
     }
   }
-  
-  
 
-  openSnackBar() {
-    return this._snackBar.open('Successfully Signed Up 😀', 'Close', {
+  openSnackBar(message: string, action: string) {
+    return this._snackBar.open(message, action, {
       duration: 2500,
       verticalPosition: 'top',
       horizontalPosition: 'end',
