@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
@@ -7,18 +6,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { ButtonProvidersComponent } from '../components/button-providers/button-providers.component';
+import { MensajeService } from '../../../services/mensaje.service';
+
 
 interface LogInForm {
   email: FormControl<string>;
@@ -40,16 +38,16 @@ interface LogInForm {
     ButtonProvidersComponent,
   ],
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss',
+  styleUrls: ['./log-in.component.scss'],
 })
-
 export default class LogInComponent {
-
   hide = true;
+
   constructor() {}
 
   formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
+  private mensajeService = inject(MensajeService); // Inyectar MensajeService
   private router = inject(Router);
   private _snackBar = inject(MatSnackBar);
 
@@ -59,26 +57,36 @@ export default class LogInComponent {
       nonNullable: true,
     }),
     password: this.formBuilder.control('', {
-      validators: Validators.required,
+      validators: [Validators.required],
       nonNullable: true,
     }),
   });
 
-  get isEmailValid(): string | boolean {
+  get isEmailInvalid(): boolean {
     const control = this.form.get('email');
-    const isInvalid = control?.invalid && control.touched;
+    return !!control?.invalid && control.touched;
+  }
 
-    if (isInvalid) {
-      return control.hasError('required')
-        ? 'ESTE CAMPO ES OBLIGATORIO'
-        : 'INGRESE UN EMAIL VALIDO';
+  get isPasswordInvalid(): boolean {
+    const control = this.form.get('password');
+    return !!control?.invalid && control.touched;
+  }
+
+  getEmailErrorMessage(): string {
+    const control = this.form.get('email');
+    if (control?.hasError('required')) {
+      return 'This field is required';
+    } else if (control?.hasError('email')) {
+      return 'Enter a valid email';
     }
-
-    return false;
+    return '';
   }
 
   async logIn(): Promise<void> {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();  // Ensure all errors are displayed
+      return;
+    }
 
     const credential: Credential = {
       email: this.form.value.email || '',
@@ -86,15 +94,49 @@ export default class LogInComponent {
     };
 
     try {
+      // Verificar si el usuario existe en Firestore
+      const userExists = await this.doesUserExist(credential.email);
+
+      if (!userExists) {
+        this.openSnackBar('User not found, please register');
+        return;
+      }
+
       await this.authService.logInWithEmailAndPassword(credential);
-      this.openAlert('Ingreso exitoso'); // Cambiado para mostrar una alerta
-      this.router.navigateByUrl('/');
+      const snackBarRef = this.openSnackBar('Successfully logged in');
+
+      snackBarRef.afterDismissed().subscribe(() => {
+        this.router.navigateByUrl('/');
+      });
     } catch (error) {
-      this.openAlert('Error al iniciar sesión: ' + error); // Cambiado para mostrar un error en alerta
+      console.error(error);
+      if (error instanceof Error) {
+        if (error.message === 'wrong-password') {
+          this.openSnackBar('Incorrect password, please try again');
+        } else {
+          this.openSnackBar('An error occurred, please try again');
+        }
+      } else {
+        this.openSnackBar('An error occurred, please try again');
+      }
     }
   }
 
-  openAlert(message: string): void {
-    alert(message); // Muestra un mensaje de alerta al usuario
+  async doesUserExist(email: string): Promise<boolean> {
+    try {
+      const userDocs = await this.mensajeService.getTasks1();
+      return userDocs.docs.some(doc => doc.data()['email'] === email);
+    } catch (error) {
+      console.error('Error checking user existence:', error);
+      return false;
+    }
+  }
+
+  openSnackBar(message: string): any {
+    return this._snackBar.open(message, 'Close', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+    });
   }
 }

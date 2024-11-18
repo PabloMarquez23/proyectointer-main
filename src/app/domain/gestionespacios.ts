@@ -1,5 +1,5 @@
 export interface GestionEspacios {
-    id?: string;
-    ubicacion: string;
-    estado: 'libre' | 'ocupado';
-  }
+  id?: string;
+  estado: 'Libre' | 'Ocupado';
+  // other properties
+}
