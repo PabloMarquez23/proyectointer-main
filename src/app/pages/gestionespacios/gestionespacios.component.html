@@ -3,7 +3,7 @@
 </header>
 
 <div class="vista-parqueadero">
-  <div
+  <div routerLink="/contratos"
     *ngFor="let espacio of espacios"
     class="espacio"
     [ngClass]="{'libre': espacio.estado === 'libre', 'ocupado': espacio.estado === 'ocupado'}"

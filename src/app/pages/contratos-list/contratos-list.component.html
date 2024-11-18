@@ -1,51 +1,57 @@
+<header>
+  <app-home></app-home>
+</header>
 
-<div class="contenedor">
-  <h2 class="centrar-texto mb-4">Listado de Contratos</h2>
+<div class="contenedor-principal">
+  <div class="contenedor">
+    <h2 class="centrar-texto mb-4">Listado de Contratos</h2>
 
-  <ul>
-    <li *ngFor="let contrato of contratos; trackBy: trackById" class="grupo-form mb-4">
-      <div>
-        <strong>Cliente:</strong> {{ contrato.cliente }}
-        <input type="text" [(ngModel)]="contrato.cliente" placeholder="Editar cliente" class="campo-formulario">
-      </div>
+    <ul>
+      <li *ngFor="let contrato of contratos; trackBy: trackById" class="grupo-form">
+        <div>
+          <strong>Cliente:</strong> {{ contrato.cliente }}
+          <input type="text" [(ngModel)]="contrato.cliente" placeholder="Editar cliente" class="campo-formulario">
+        </div>
 
-      <div>
-        <strong>Placa:</strong> {{ contrato.placa }}
-        <input type="text" [(ngModel)]="contrato.placa" placeholder="Editar dirección" class="campo-formulario">
-      </div>
+        <div>
+          <strong>Placa:</strong> {{ contrato.placa }}
+          <input type="text" [(ngModel)]="contrato.placa" placeholder="Editar dirección" class="campo-formulario">
+        </div>
 
-      <div>
-        <strong>Fecha de Inicio:</strong> {{ contrato.fechaInicio | date }}
-        <input type="date" [(ngModel)]="contrato.fechaInicio" class="campo-formulario">
-      </div>
+        <div>
+          <strong>Fecha de Inicio:</strong> {{ contrato.fechaInicio | date }}
+          <input type="date" [(ngModel)]="contrato.fechaInicio" class="campo-formulario">
+        </div>
 
-      <div>
-        <strong>Fecha de Fin:</strong> {{ contrato.fechaFin | date }}
-        <input type="date" [(ngModel)]="contrato.fechaFin" class="campo-formulario">
-      </div>
+        <div>
+          <strong>Fecha de Fin:</strong> {{ contrato.fechaFin | date }}
+          <input type="date" [(ngModel)]="contrato.fechaFin" class="campo-formulario">
+        </div>
 
-      <div>
-        <strong>Número de Espacio:</strong> {{ contrato.numeroespacio }}
-        <input type="text" [(ngModel)]="contrato.numeroespacio" placeholder="Editar número de espacio" class="campo-formulario">
-      </div>
+        <div>
+          <strong>Número de Espacio:</strong> {{ contrato.numeroespacio }}
+          <input type="text" [(ngModel)]="contrato.numeroespacio" placeholder="Editar número de espacio" class="campo-formulario">
+        </div>
 
-      <div>
-        <strong>Monto Mensual:</strong> {{ contrato.montoMensual | currency }}
-        <input type="number" [(ngModel)]="contrato.montoMensual" placeholder="Editar monto mensual" class="campo-formulario">
-      </div>
-      <div>
-        <strong>Estado:</strong>
-        <select [(ngModel)]="contrato.estado" class="campo-formulario">
-          <option value="Disponible">Disponible</option>
-          <option value="Ocupado">Ocupado</option>
-        </select>
-      </div>
+        <div>
+          <strong>Monto Mensual:</strong> {{ contrato.montoMensual | currency }}
+          <input type="number" [(ngModel)]="contrato.montoMensual" placeholder="Editar monto mensual" class="campo-formulario">
+        </div>
 
-      <button (click)="actualizarContrato(contrato)" class="btn-primario">Actualizar</button>
-      <button (click)="eliminarContrato(contrato.id)" class="btn-primario">Eliminar</button>
-      <hr>
-    </li>
-  </ul>
-  
-  <button [routerLink]="['/contratos']" class="btn-primario">Regresar</button>
+        <div>
+          <strong>Estado:</strong>
+          <select [(ngModel)]="contrato.estado" class="campo-formulario">
+            <option value="Disponible">Disponible</option>
+            <option value="Ocupado">Ocupado</option>
+          </select>
+        </div>
+
+        <button (click)="actualizarContrato(contrato)" class="btn-primario">Actualizar</button>
+        <button (click)="eliminarContrato(contrato.id)" class="btn-secundario">Eliminar</button>
+        <hr />
+      </li>
+    </ul>
+
+    <button [routerLink]="['/contratos']" class="btn-regresar">Regresar</button>
+  </div>
 </div>
