@@ -1,59 +1,68 @@
 <header>
+  <!-- Componente del encabezado principal de la aplicación -->
   <app-home></app-home>
 </header>
 
 <div class="contenedor">
+  <!-- Contenedor principal para organizar la tarjeta del formulario -->
   <div class="tarjeta">
+    <!-- Título del formulario -->
     <h2 class="centrar-texto mb-4">Gestión de Contratos</h2>
 
+    <!-- Campo para ingresar el nombre del cliente -->
     <div class="grupo-form mb-3">
       <label for="cliente">Cliente:</label>
       <input type="text" id="cliente" placeholder="Nombre del cliente..." [(ngModel)]="nuevoContrato.cliente" class="campo-formulario">
     </div>
 
-     <!-- Campo adicional: Placa -->
-     <div class="grupo-form mb-3">
+    <!-- Campo para ingresar la placa del vehículo asociado al contrato -->
+    <div class="grupo-form mb-3">
       <label for="placa">Placa:</label>
       <input type="text" id="placa" placeholder="Placa del vehículo..." [(ngModel)]="nuevoContrato.placa" class="campo-formulario">
     </div>
 
+    <!-- Campo para seleccionar la fecha de inicio del contrato -->
     <div class="grupo-form mb-3">
       <label for="fechaInicio">Fecha de Inicio:</label>
       <input type="date" id="fechaInicio" [(ngModel)]="nuevoContrato.fechaInicio" class="campo-formulario">
     </div>
 
+    <!-- Campo para seleccionar la fecha de fin del contrato -->
     <div class="grupo-form mb-3">
       <label for="fechaFin">Fecha de Fin:</label>
       <input type="date" id="fechaFin" [(ngModel)]="nuevoContrato.fechaFin" class="campo-formulario">
     </div>
 
+    <!-- Campo para ingresar el número del espacio asignado al contrato -->
     <div class="grupo-form mb-3">
       <label for="numeroespacio">Número de Espacio:</label>
       <input type="text" id="numeroespacio" placeholder="Número de espacio..." [(ngModel)]="nuevoContrato.numeroespacio" class="campo-formulario">
     </div>
 
+    <!-- Campo para ingresar el monto mensual del contrato -->
     <div class="grupo-form mb-3">
       <label for="montoMensual">Monto Mensual:</label>
       <input type="number" id="montoMensual" placeholder="Monto mensual..." [(ngModel)]="nuevoContrato.montoMensual" class="campo-formulario">
     </div>
 
-    
-
-    <!-- Campo adicional: Estado -->
-    <div>
-      <strong>Estado:</strong> {{ nuevoContrato.estado }}
-      <select [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
+    <!-- Menú desplegable para seleccionar el estado del espacio -->
+    <div class="grupo-form">
+      <label for="estado"><strong>Estado:</strong></label>
+      <select id="estado" [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
+        <!-- Opción para estado "Disponible" -->
         <option value="Disponible">Disponible</option>
+        <!-- Opción para estado "Ocupado" -->
         <option value="Ocupado">Ocupado</option>
       </select>
     </div>
 
-    <!-- Botón para agregar contrato -->
+    <!-- Botón que llama a la función agregarContrato() para registrar un nuevo contrato -->
     <button (click)="agregarContrato()" class="btn-primario">Agregar Contrato</button>
 
+    <!-- Separador visual -->
     <hr>
 
-    <!-- Enlace para ver el listado de contratos -->
+    <!-- Botón para navegar al listado de contratos existentes -->
     <button [routerLink]="['/contratos-list']" class="btn-primario">Ver Listado de Contratos</button>
   </div>
 </div>
