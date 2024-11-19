@@ -1,43 +1,79 @@
-import { Component, OnInit } from '@angular/core'; // Importación del decorador Component y la interfaz OnInit de Angular
-import { ContratosService } from '../../services/contratos.service'; // Importación del servicio que gestiona los contratos
-import { Contratos } from '../../domain/contratos'; // Importación de la clase/entidad Contratos
-import { FormsModule } from '@angular/forms'; // Importación del módulo de formularios para usar ngModel
-import { CommonModule } from '@angular/common'; // Importación de módulos comunes de Angular
-import { RouterLink } from '@angular/router'; // Importación del RouterLink para la navegación
-import HomeComponent from "../home/home.component"; // Importación del componente Home
+import { Component, OnInit } from '@angular/core';
+import { ContratosService } from '../../services/contratos.service';
+import { Contratos } from '../../domain/contratos';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import HomeComponent from "../home/home.component";
 
 @Component({
-  selector: 'app-contratos-list', // El nombre del selector para este componente
-  standalone: true, // Este componente es autónomo, no depende de un módulo raíz (Angular 14+)
-  imports: [FormsModule, CommonModule, RouterLink, HomeComponent], // Importación de módulos que utiliza este componente
-  templateUrl: './contratos-list.component.html', // Ruta al archivo HTML de la plantilla
-  styleUrls: ['./contratos-list.component.scss'] // Ruta al archivo de estilos CSS/SCSS
+  selector: 'app-contratos-list',
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterLink, HomeComponent],
+  templateUrl: './contratos-list.component.html',
+  styleUrls: ['./contratos-list.component.scss']
 })
 export class ContratosListComponent implements OnInit {
-  contratos: Contratos[] = []; // Array que almacena los contratos
+  contratos: Contratos[] = [];
 
-  // Inyección del servicio ContratosService en el constructor
   constructor(private contratosService: ContratosService) {}
 
-  // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
-    this.obtenerContratos(); // Obtiene la lista de contratos cuando el componente se inicializa
+    this.obtenerContratos();
   }
 
-  // Método para obtener la lista de contratos desde el servicio
   obtenerContratos() {
     this.contratosService.getContratos().then((querySnapshot) => {
-      // Al recibir los datos, mapeamos los documentos y los convertimos en objetos de tipo Contratos
       this.contratos = querySnapshot.docs.map(doc => {
         const data = doc.data();
-        return { id: doc.id, ...data } as Contratos; // Asignamos el ID del documento y sus datos
+        return { id: doc.id, ...data } as Contratos;
       });
     });
   }
 
-  // Método para actualizar un contrato
+  // Método para actualizar un contrato con validaciones
   actualizarContrato(contrato: Contratos) {
-    if (contrato.id) { // Comprobamos si el contrato tiene un ID
+    // Validación de los campos requeridos
+    if (!contrato.cliente || !contrato.numeroespacio || !contrato.montoMensual) {
+      if (!contrato.cliente) {
+        alert('El nombre del cliente es obligatorio.');
+      }
+      if (!contrato.numeroespacio) {
+        alert('El número de espacio es obligatorio.');
+      }
+      if (!contrato.montoMensual) {
+        alert('El monto mensual es obligatorio.');
+      }
+      return;
+    }
+
+    // Validación: El nombre del cliente no debe contener números
+    const regexNombreCliente = /^[A-Za-z\s]+$/;
+    if (!regexNombreCliente.test(contrato.cliente)) {
+      alert('El nombre del cliente no debe contener números.');
+      return;
+    }
+
+    // Validación: La fecha de inicio debe ser antes de la fecha de fin
+    if (contrato.fechaInicio >= contrato.fechaFin) {
+      alert('La fecha de inicio debe ser anterior a la fecha de fin.');
+      return;
+    }
+
+    // Validación: El número de espacio debe ser un número
+    if (isNaN(Number(contrato.numeroespacio))) {
+      alert('El número de espacio debe ser un número válido.');
+      return;
+    }
+
+    // Validación: El monto mensual debe ser un número positivo
+    if (isNaN(contrato.montoMensual) || contrato.montoMensual <= 0) {
+      alert('El monto mensual debe ser un número positivo.');
+      return;
+    }
+
+    // Si todas las validaciones son correctas, procede con la actualización
+    if (contrato.id) {
       this.contratosService.updateContrato(contrato.id, {
         cliente: contrato.cliente,
         placa: contrato.placa,
@@ -45,29 +81,36 @@ export class ContratosListComponent implements OnInit {
         fechaFin: contrato.fechaFin,
         numeroespacio: contrato.numeroespacio,
         montoMensual: contrato.montoMensual,
-        estado: contrato.estado // Estado actualizado del contrato
+        estado: contrato.estado
       }).then(() => {
-        console.log('Contrato actualizado'); // Confirmación de éxito en la actualización
+        alert('Contrato actualizado exitosamente.');
       }).catch((error: any) => {
-        console.error('Error al actualizar el contrato:', error); // Manejo de errores si algo sale mal
+        console.error('Error al actualizar el contrato:', error);
+        alert('Ocurrió un error al actualizar el contrato.');
       });
     }
   }
 
-  // Método para eliminar un contrato
+  // Método para eliminar un contrato con validación
   eliminarContrato(id: string | undefined) {
-    if (id) { // Comprobamos que el ID no sea undefined
+    if (!id) {
+      alert('Error: El ID del contrato es obligatorio para eliminar.');
+      return;
+    }
+
+    // Confirmación antes de eliminar el contrato
+    if (confirm('¿Estás seguro de que deseas eliminar este contrato?')) {
       this.contratosService.deleteContrato(id).then(() => {
-        this.obtenerContratos(); // Recargamos la lista de contratos después de la eliminación
+        this.obtenerContratos();
+        alert('Contrato eliminado exitosamente.');
+      }).catch((error: any) => {
+        console.error('Error al eliminar el contrato:', error);
+        alert('Ocurrió un error al eliminar el contrato.');
       });
-    } else {
-      console.error('Error: El ID del contrato es undefined.'); // Si no hay ID, mostramos un mensaje de error
     }
   }
 
-  // Método para optimizar la renderización de la lista de contratos
   trackById(index: number, contrato: Contratos): string {
-    // Usamos el ID del contrato para rastrear cada elemento, lo que mejora el rendimiento al actualizar la lista
     return contrato.id ? contrato.id : index.toString();
   }
 }

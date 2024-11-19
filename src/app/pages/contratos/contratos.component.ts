@@ -57,49 +57,67 @@ export class ContratosComponent implements OnInit {
    */
   agregarContrato() {
     // Validación de campos requeridos
-    if (this.nuevoContrato.cliente && this.nuevoContrato.numeroespacio && this.nuevoContrato.montoMensual >= 0) {
-      this.contratosService.addContrato(this.nuevoContrato).then(() => {
-        // Resetea el formulario al estado inicial
-        this.nuevoContrato = {
-          cliente: '',
-          placa: '',
-          fechaInicio: new Date(),
-          fechaFin: new Date(),
-          numeroespacio: '',
-          montoMensual: 0,
-          estado: 'Disponible'
-        };
-        this.obtenerContratos(); // Actualiza la lista de contratos
-      }).catch(error => {
-        console.error('Error al agregar contrato:', error); // Manejo de errores
-      });
-    } else {
-      console.warn('Por favor, completa todos los campos obligatorios.'); // Mensaje de advertencia
+    if (!this.nuevoContrato.cliente || !this.nuevoContrato.numeroespacio || !this.nuevoContrato.montoMensual) {
+      if (!this.nuevoContrato.cliente) {
+        alert('El nombre del cliente es obligatorio.');
+      }
+      if (!this.nuevoContrato.numeroespacio) {
+        alert('El número de espacio es obligatorio.');
+      }
+      if (!this.nuevoContrato.montoMensual) {
+        alert('El monto mensual es obligatorio.');
+      }
+      return;
     }
-  }
-
-  /**
-   * Elimina un contrato de la base de datos.
-   * @param id El ID del contrato a eliminar.
-   */
-  eliminarContrato(id: string | undefined) {
-    if (id) {
-      this.contratosService.deleteContrato(id).then(() => {
-        this.obtenerContratos(); // Actualiza la lista tras eliminar
-      });
-    } else {
-      console.error('Error: El ID del contrato es undefined.'); // Manejo de errores si el ID no está definido
+  
+    // Validación: El nombre del cliente no debe contener números
+    const regexNombreCliente = /^[A-Za-z\s]+$/;
+    if (!regexNombreCliente.test(this.nuevoContrato.cliente)) {
+      alert('El nombre del cliente no debe contener números.');
+      return;
     }
+  
+    // Validación: La fecha de inicio debe ser antes de la fecha de fin
+    if (this.nuevoContrato.fechaInicio >= this.nuevoContrato.fechaFin) {
+      alert('La fecha de inicio debe ser anterior a la fecha de fin.');
+      return;
+    }
+  
+    // Validación: El número de espacio debe ser un número
+    if (isNaN(Number(this.nuevoContrato.numeroespacio))) {
+      alert('El número de espacio debe ser un número válido.');
+      return;
+    }
+  
+    // Validación: El monto mensual debe ser un número positivo
+    if (isNaN(this.nuevoContrato.montoMensual) || this.nuevoContrato.montoMensual <= 0) {
+      alert('El monto mensual debe ser un número positivo.');
+      return;
+    }
+  
+    // Si todas las validaciones son correctas, agrega el contrato
+    this.contratosService.addContrato(this.nuevoContrato).then(() => {
+      // Alerta de éxito al guardar el contrato
+      alert('Contrato guardado exitosamente.');
+  
+      // Resetea el formulario después de agregar el contrato
+      this.nuevoContrato = {
+        cliente: '',
+        placa: '',
+        fechaInicio: new Date(),
+        fechaFin: new Date(),
+        numeroespacio: '',
+        montoMensual: 0,
+        estado: 'Disponible'
+      };
+  
+      // Actualiza la lista de contratos
+      this.obtenerContratos();
+    }).catch(error => {
+      console.error('Error al agregar contrato:', error);
+      alert('Ocurrió un error al guardar el contrato.'); // Alerta si ocurre un error al guardar
+    });
   }
-
-  /**
-   * Función de seguimiento para optimizar el rendimiento de la lista.
-   * Permite a Angular identificar correctamente los elementos por su ID.
-   * @param index Índice del elemento en la lista.
-   * @param contrato Objeto del contrato.
-   * @returns ID del contrato o el índice como cadena.
-   */
-  trackById(index: number, contrato: Contratos): string {
-    return contrato.id ? contrato.id : index.toString(); // Devuelve el ID del contrato o el índice como respaldo
-  }
+  
+  
 }
