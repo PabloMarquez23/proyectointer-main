@@ -1,13 +1,20 @@
+<!-- Encabezado del sitio -->
 <header>
+  <!-- Componente Angular para el encabezado -->
   <app-home></app-home>
 </header>
 
+<!-- Contenedor principal -->
 <div class="contenedor">
+  <!-- Tarjeta para la sección de gestión de tarifas -->
   <div class="tarjeta">
+    <!-- Título de la tarjeta -->
     <h2 class="centrar-texto mb-4">Gestión de Tarifas</h2>
 
+    <!-- Campo para el nombre de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="nombretarifa">Nombre de la Tarifa:</label>
+      <!-- Input para ingresar el nombre de la tarifa, vinculado a la propiedad `nombretarifa` del modelo `nuevaTarifa` -->
       <input 
         type="text" 
         id="nombretarifa" 
@@ -18,8 +25,10 @@
       >
     </div>
 
+    <!-- Campo para el costo de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="costo">Costo:</label>
+      <!-- Input de tipo numérico para ingresar el costo de la tarifa -->
       <input 
         type="number" 
         id="costo" 
@@ -30,8 +39,10 @@
       >
     </div>
 
+    <!-- Campo para la duración de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="duracion">Duración (en días):</label>
+      <!-- Input de tipo numérico para ingresar la duración en días -->
       <input 
         type="number" 
         id="duracion" 
@@ -42,10 +53,12 @@
       >
     </div>
 
+    <!-- Botón para agregar una nueva tarifa -->
     <button (click)="agregarTarifa()" class="btn-primario">Agregar Tarifa</button>
 
     <hr>
 
+    <!-- Botón para navegar al listado de tarifas -->
     <button [routerLink]="['/tarifas-list']" class="btn-primario">Ver Listado de Tarifas</button>
   </div>
 </div>

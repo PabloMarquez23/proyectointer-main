@@ -1,31 +1,75 @@
 <div class="contenedor-principal">
+  <!-- Contenedor general para la página del listado de tarifas -->
   <div class="contenedor">
+    <!-- Título del listado de tarifas -->
     <h2 class="centrar-texto mb-4">Listado de Tarifas</h2>
   
+    <!-- Lista dinámica de tarifas -->
     <ul>
+      <!-- Iteración sobre las tarifas con *ngFor -->
       <li *ngFor="let tarifa of tarifas; trackBy: trackById" class="grupo-form mb-4">
+        <!-- Información del nombre de la tarifa -->
         <div>
           <strong>Nombre de la Tarifa:</strong> {{ tarifa.nombretarifa }}
-          <input type="text" [(ngModel)]="tarifa.nombretarifa" placeholder="Editar nombre de la tarifa" class="campo-formulario">
+          <!-- Campo de edición del nombre de la tarifa -->
+          <input 
+            type="text" 
+            [(ngModel)]="tarifa.nombretarifa" 
+            placeholder="Editar nombre de la tarifa" 
+            class="campo-formulario"
+          >
         </div>
     
+        <!-- Información del costo de la tarifa -->
         <div>
           <strong>Costo:</strong> {{ tarifa.costo }}
-          <input type="number" [(ngModel)]="tarifa.costo" placeholder="Editar costo" class="campo-formulario">
+          <!-- Campo de edición del costo -->
+          <input 
+            type="number" 
+            [(ngModel)]="tarifa.costo" 
+            placeholder="Editar costo" 
+            class="campo-formulario"
+          >
         </div>
     
+        <!-- Información de la duración de la tarifa -->
         <div>
           <strong>Duración (en días):</strong> {{ tarifa.duracion }}
-          <input type="number" [(ngModel)]="tarifa.duracion" placeholder="Editar duración" class="campo-formulario">
+          <!-- Campo de edición de la duración -->
+          <input 
+            type="number" 
+            [(ngModel)]="tarifa.duracion" 
+            placeholder="Editar duración" 
+            class="campo-formulario"
+          >
         </div>
     
-        <button (click)="actualizarTarifa(tarifa)" class="btn-primario">Actualizar</button>
-        <button (click)="eliminarTarifa(tarifa.id)" class="btn-primario">Eliminar</button>
+        <!-- Botón para actualizar la tarifa -->
+        <button 
+          (click)="actualizarTarifa(tarifa)" 
+          class="btn-primario"
+        >
+          Actualizar
+        </button>
+
+        <!-- Botón para eliminar la tarifa -->
+        <button 
+          (click)="eliminarTarifa(tarifa.id)" 
+          class="btn-primario"
+        >
+          Eliminar
+        </button>
+        <!-- Separador entre elementos de la lista -->
         <hr>
       </li>
     </ul>
 
     <!-- Botón para regresar a la página de agregar tarifas -->
-    <button [routerLink]="['/tarifas']" class="btn-primario">Regresar</button>
+    <button 
+      [routerLink]="['/tarifas']" 
+      class="btn-primario"
+    >
+      Regresar
+    </button>
   </div>
 </div>

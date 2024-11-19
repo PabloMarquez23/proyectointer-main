@@ -39,15 +39,13 @@
 
     
 
-    <!-- Campo adicional: Estado -->
-    <div>
-      <strong>Estado:</strong> {{ nuevoContrato.estado }}
-      <select [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
+    <div class="grupo-form">
+      <label for="estado"><strong>Estado:</strong></label>
+      <select id="estado" [(ngModel)]="nuevoContrato.estado" class="campo-formulario">
         <option value="Disponible">Disponible</option>
         <option value="Ocupado">Ocupado</option>
       </select>
     </div>
-
     <!-- Botón para agregar contrato -->
     <button (click)="agregarContrato()" class="btn-primario">Agregar Contrato</button>
 

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { authGuard, publicGuard } from './core/guards';
-import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EdiPerfilComponent } from './pages/edi-perfil/edi-perfil.component';
 import PrincipalComponent from './pages/principal/principal.component';
 import LogInComponent from './pages/auth/log-in/log-in.component';
@@ -38,7 +37,6 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'perfil', title: 'editar', component: PerfilComponent, canActivate: [AdminGuard] },
   { path: 'edi-perfil', title: 'eliminar', component: EdiPerfilComponent },
   { path: 'principal', title: 'principal', component: PrincipalComponent },
   { path: 'usuarios', title: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard] },

@@ -96,3 +96,19 @@ button[routerLink] {
 button[routerLink]:hover {
   background-color: #5a8bc2;
 }
+
+.grupo-form select#estado {
+  width: 100%;
+  max-width: 1000px; /* Reducir ancho solo para este select */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.grupo-form select#estado:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
