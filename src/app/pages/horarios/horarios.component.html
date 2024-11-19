@@ -1,30 +1,41 @@
 <header>
+  <!-- Componente de inicio que probablemente contiene el menú y la barra de navegación -->
   <app-home></app-home>
 </header>
 
 <div class="contenedor">
+  <!-- Tarjeta principal que contiene el formulario de gestión de horarios -->
   <div class="tarjeta">
     <h2 class="centrar-texto mb-4">Gestión de Horarios</h2>
 
+    <!-- Grupo de formulario para ingresar el día -->
     <div class="grupo-form mb-3">
       <label for="dia">Día:</label>
+      <!-- Campo de texto para ingresar el día -->
       <input type="text" id="dia" placeholder="Escribe el día..." [(ngModel)]="nuevoHorario.dia" class="campo-formulario">
     </div>
 
+    <!-- Grupo de formulario para ingresar la hora de inicio -->
     <div class="grupo-form mb-3">
       <label for="horainicio">Hora de Inicio:</label>
+      <!-- Campo de tiempo para ingresar la hora de inicio -->
       <input type="time" id="horainicio" placeholder="Ingrese la hora de inicio..." [(ngModel)]="nuevoHorario.horainicio" class="campo-formulario">
     </div>
 
+    <!-- Grupo de formulario para ingresar la hora de fin -->
     <div class="grupo-form mb-3">
       <label for="horafin">Hora de Fin:</label>
+      <!-- Campo de tiempo para ingresar la hora de fin -->
       <input type="time" id="horafin" placeholder="Ingrese la hora de fin..." [(ngModel)]="nuevoHorario.horafin" class="campo-formulario">
     </div>
 
+    <!-- Botón para agregar un nuevo horario -->
     <button (click)="agregarHorario()" class="btn-primario">Agregar Horario</button>
 
+    <!-- Separador horizontal -->
     <hr>
 
+    <!-- Botón que redirige a la lista de horarios -->
     <button [routerLink]="['/horarios-list']" class="btn-primario">Ver Listado de Horarios</button>
 
   </div>

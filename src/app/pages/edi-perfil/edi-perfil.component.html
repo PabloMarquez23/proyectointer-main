@@ -1,36 +1,54 @@
 <header>
+  <!-- Componente principal de la aplicación (probablemente un componente de bienvenida o home) -->
   <app-home></app-home>
 </header>
+
 <br/>
 <br/>
+
 <div class="contenedor">
-  
-    
+  <!-- Contenedor principal de la sección para actualizar el perfil del usuario -->
   <div class="tarjeta">
     
+    <!-- Contenedor del formulario para actualizar los datos del perfil -->
     <div class="form-row">
-      <h2 class="centrar-texto mb-4"> Actualizar Perfil</h2>
+      <!-- Título del formulario de actualización de perfil -->
+      <h2 class="centrar-texto mb-4">Actualizar Perfil</h2>
+      
+      <!-- Contenedor para el campo de email -->
       <div class="form-container">
+        <!-- Muestra el email actual del usuario -->
         <li><strong>Email:</strong> {{usuario.email}}</li>
+        <!-- Campo de entrada para editar el email del usuario, con ngModel para la vinculación bidireccional -->
         <input type="text" class="campo-formulario" id="editar-email" placeholder="Escribe el correo electrónico..." [(ngModel)]="usuario.email">
       </div>
       
+      <!-- Contenedor para el campo de apellido -->
       <div class="form-container">
+        <!-- Muestra el apellido actual del usuario -->
         <li><span><strong>Apellido:</strong> {{usuario.lastName}}</span></li>
+        <!-- Campo de entrada para editar el apellido del usuario -->
         <input type="text" class="campo-formulario" id="editar-lastname" placeholder="Ingrese el apellido" [(ngModel)]="usuario.lastName">
       </div>
 
+      <!-- Contenedor para el campo de nombre -->
       <div class="form-container">
+        <!-- Muestra el nombre actual del usuario -->
         <li><span><strong>Nombre:</strong> {{usuario.names}}</span></li>
+        <!-- Campo de entrada para editar el nombre del usuario -->
         <input type="text" class="campo-formulario" id="editar-names" placeholder="Ingrese el nombre" [(ngModel)]="usuario.names">
       </div>
 
+      <!-- Contenedor para el campo de nueva contraseña -->
       <div class="form-container">
+        <!-- Etiqueta y campo de entrada para la nueva contraseña -->
         <label for="nueva-contrasena">Nueva Contraseña:</label>
         <input type="password" class="campo-formulario" id="nueva-contrasena" placeholder="Escribe la nueva contraseña..." [(ngModel)]="usuario.contrasenia">
       </div>
    
     </div>
+
+    <!-- Botón para guardar los cambios en el perfil del usuario -->
     <button (click)="guardar()" class="btn-primario">Guardar Cambios</button>
   </div>
 </div>

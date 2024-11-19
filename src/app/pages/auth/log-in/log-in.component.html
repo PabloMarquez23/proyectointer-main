@@ -1,25 +1,40 @@
 <body>
+  <!-- Fondo decorativo principal -->
   <div class="background-image">
+    <!-- Contenedor principal del formulario -->
     <div class="form">
       <div class="form__container">
+        <!-- Título del formulario -->
         <h1 class="small-text-providers">Log in</h1>
+
+        <!-- Formulario reactivo vinculado a un FormGroup -->
         <form [formGroup]="form" (ngSubmit)="logIn()">
+          <!-- Campo de entrada para el correo electrónico -->
           <div>
             <mat-form-field>
+              <!-- Etiqueta del campo -->
               <mat-label>Email</mat-label>
+              <!-- Campo de entrada vinculado al FormControl "email" -->
               <input matInput formControlName="email" />
-              <mat-error *ngIf="isEmailInvalid">{{ getEmailErrorMessage() }}</mat-error>
+              <!-- Mensaje de error si el campo de correo electrónico es inválido -->
+              <mat-error *ngIf="isEmailInvalid">
+                {{ getEmailErrorMessage() }}
+              </mat-error>
             </mat-form-field>
           </div>
 
+          <!-- Campo de entrada para la contraseña -->
           <div>
             <mat-form-field>
+              <!-- Etiqueta del campo -->
               <mat-label>Enter your password</mat-label>
+              <!-- Campo de entrada con funcionalidad para mostrar/ocultar contraseña -->
               <input
                 matInput
-                [type]="hide ? 'password' : 'text'"
+                [type]="hide ? 'password' : 'text'" 
                 formControlName="password"
               />
+              <!-- Botón para alternar la visibilidad de la contraseña -->
               <button
                 mat-icon-button
                 matSuffix
@@ -27,21 +42,37 @@
                 [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide"
               >
+                <!-- Icono que cambia dinámicamente según el estado de "hide" -->
                 <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
               </button>
-              <mat-error *ngIf="isPasswordInvalid">This field is required</mat-error>
+              <!-- Mensaje de error si el campo de contraseña es inválido -->
+              <mat-error *ngIf="isPasswordInvalid">
+                This field is required
+              </mat-error>
             </mat-form-field>
           </div>
 
+          <!-- Botón para enviar el formulario -->
           <div>
-            <button mat-flat-button color="accent" type="submit">Log in</button>
+            <button mat-flat-button color="accent" type="submit">
+              Log in
+            </button>
           </div>
         </form>
+
+        <!-- Separador visual -->
         <hr />
+
+        <!-- Texto informativo para autenticación con Google -->
         <span class="small-text-providers">Have Google?</span>
-        <app-button-providers [isLogin]="true" />
-        <span class="small-textlog-in-redirect">Don’t have an account yet?
-          <a routerLink="/auth/sign-up">Sign up</a></span>
+        <!-- Componente reutilizable para botones de autenticación -->
+        <app-button-providers [isLogin]="true"></app-button-providers>
+
+        <!-- Enlace para redirigir a la página de registro -->
+        <span class="small-textlog-in-redirect">
+          Don’t have an account yet?
+          <a routerLink="/auth/sign-up">Sign up</a>
+        </span>
       </div>
     </div>
   </div>
