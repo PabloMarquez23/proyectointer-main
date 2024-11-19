@@ -1,57 +1,77 @@
 <header>
+  <!-- Componente principal de la aplicación (probablemente un componente de bienvenida o home) -->
   <app-home></app-home>
 </header>
 
 <div class="contenedor-principal">
   <div class="contenedor">
+    <!-- Título de la página, que muestra "Listado de Contratos" -->
     <h2 class="centrar-texto mb-4">Listado de Contratos</h2>
 
+    <!-- Lista de contratos, que se genera dinámicamente usando *ngFor -->
     <ul>
       <li *ngFor="let contrato of contratos; trackBy: trackById" class="grupo-form">
+        <!-- Sección para mostrar y editar el cliente del contrato -->
         <div>
           <strong>Cliente:</strong> {{ contrato.cliente }}
+          <!-- Campo para editar el cliente usando ngModel para la vinculación bidireccional -->
           <input type="text" [(ngModel)]="contrato.cliente" placeholder="Editar cliente" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar la placa del contrato -->
         <div>
           <strong>Placa:</strong> {{ contrato.placa }}
+          <!-- Campo para editar la placa utilizando ngModel -->
           <input type="text" [(ngModel)]="contrato.placa" placeholder="Editar dirección" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar la fecha de inicio del contrato -->
         <div>
           <strong>Fecha de Inicio:</strong> {{ contrato.fechaInicio | date }}
+          <!-- Campo para seleccionar la nueva fecha de inicio del contrato -->
           <input type="date" [(ngModel)]="contrato.fechaInicio" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar la fecha de fin del contrato -->
         <div>
           <strong>Fecha de Fin:</strong> {{ contrato.fechaFin | date }}
+          <!-- Campo para seleccionar la nueva fecha de fin del contrato -->
           <input type="date" [(ngModel)]="contrato.fechaFin" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar el número de espacio asignado al contrato -->
         <div>
           <strong>Número de Espacio:</strong> {{ contrato.numeroespacio }}
+          <!-- Campo para editar el número de espacio utilizando ngModel -->
           <input type="text" [(ngModel)]="contrato.numeroespacio" placeholder="Editar número de espacio" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar el monto mensual del contrato -->
         <div>
           <strong>Monto Mensual:</strong> {{ contrato.montoMensual | currency }}
+          <!-- Campo para editar el monto mensual utilizando ngModel -->
           <input type="number" [(ngModel)]="contrato.montoMensual" placeholder="Editar monto mensual" class="campo-formulario">
         </div>
 
+        <!-- Sección para mostrar y editar el estado del contrato -->
         <div>
           <strong>Estado:</strong>
+          <!-- Selector para cambiar el estado del contrato, vinculado con ngModel -->
           <select [(ngModel)]="contrato.estado" class="campo-formulario">
             <option value="Disponible">Disponible</option>
             <option value="Ocupado">Ocupado</option>
           </select>
         </div>
 
+        <!-- Botón para actualizar el contrato, invoca la función actualizarContrato(contrato) -->
         <button (click)="actualizarContrato(contrato)" class="btn-primario">Actualizar</button>
+        <!-- Botón para eliminar el contrato, invoca la función eliminarContrato(contrato.id) -->
         <button (click)="eliminarContrato(contrato.id)" class="btn-secundario">Eliminar</button>
         <hr />
       </li>
     </ul>
 
+    <!-- Botón para regresar a la lista de contratos, usa el enrutamiento de Angular -->
     <button [routerLink]="['/contratos']" class="btn-regresar">Regresar</button>
   </div>
 </div>

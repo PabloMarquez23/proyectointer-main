@@ -1,18 +1,38 @@
 <header class="header">
+  <!-- Barra de navegación del encabezado -->
   <nav class="header_nav">
     <ul class="header__ul">
-      <li *ngIf="isAdmin" class="header__li"><a routerLink='/gestionespacios'>GESTIÓN DE ESPACIOS</a></li>
-      <li *ngIf="isAdmin" class="header__li"><a routerLink='/contratos-list'>CONTRATO</a></li>
-      <li *ngIf="isAdmin" class="header__li"><a routerLink='/tarifas'>TARIFAS</a></li>
-      <li *ngIf="isAdmin" class="header__li"><a routerLink='/horarios'>HORARIOS</a></li>
-      <li *ngIf="isAdmin" class="header__li"><a routerLink='/usuarios'>USUARIOS</a></li>
+      <!-- Solo muestra estos elementos si el usuario es administrador (isAdmin) -->
+      <li *ngIf="isAdmin" class="header__li">
+        <a routerLink='/gestionespacios'>GESTIÓN DE ESPACIOS</a>
+      </li>
+      <li *ngIf="isAdmin" class="header__li">
+        <a routerLink='/contratos-list'>CONTRATO</a>
+      </li>
+      <li *ngIf="isAdmin" class="header__li">
+        <a routerLink='/tarifas'>TARIFAS</a>
+      </li>
+      <li *ngIf="isAdmin" class="header__li">
+        <a routerLink='/horarios'>HORARIOS</a>
+      </li>
+      <li *ngIf="isAdmin" class="header__li">
+        <a routerLink='/usuarios'>USUARIOS</a>
+      </li>
+      <!-- El siguiente enlace está comentado (no activo en la interfaz) -->
       <!--<li *ngIf="isAdmin" class="header__li"><a [routerLink]="'/anadir'">EDITAR USUARIO</a></li>-->
-      <li class="header__li"><a [routerLink]="'/edi-perfil'">Actualizar Perfil</a></li>
+      
+      <!-- Enlace para actualizar el perfil del usuario -->
+      <li class="header__li">
+        <a [routerLink]="'/edi-perfil'">Actualizar Perfil</a>
+      </li>
+
+      <!-- Botón para cerrar sesión -->
       <button mat-flat-button (click)="logOut()">Log out</button>
     </ul>
   </nav>
 </header>
 
 <main class="content">
+  <!-- Aquí se renderizan las vistas del contenido según el enlace activado -->
   <router-outlet></router-outlet>
 </main>
