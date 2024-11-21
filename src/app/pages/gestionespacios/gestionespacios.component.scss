@@ -1,34 +1,26 @@
-// Contenedor principal
-.vista-parqueadero {
+.grid-espacios {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); // 4 columnas
-  gap: 10px; // Espacio entre los elementos
-  justify-content: center; // Centrar la cuadrícula horizontalmente
-  align-items: center; // Centrar los elementos verticalmente
-  padding: 20px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
 }
 
-// Estilos generales para los espacios
 .espacio {
-  width: 100px;
-  height: 100px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 50px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
 
-  // Estados específicos
-  &.libre {
-    background-color: green;
-  }
+.espacio-disponible {
+  background-color: #4caf50; /* Verde */
+  color: white;
+}
 
-  &.ocupado {
-    background-color: red;
-  }
+.espacio-ocupado {
+  background-color: #f44336; /* Rojo */
+  color: white;
 }

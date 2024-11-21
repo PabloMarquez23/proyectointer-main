@@ -1,5 +1,5 @@
 export interface Contratos {
-  [x: string]: any;
+  
   
   id?: string;
   cliente: string;
