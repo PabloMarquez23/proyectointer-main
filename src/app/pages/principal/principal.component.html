@@ -16,11 +16,148 @@
   <p>¡Bienvenido a la plataforma de gestión de parqueadero de la Universidad Politécnica Salesiana (UPS)! Este sistema facilita el control de espacios, contratos de alquiler, y gestión de usuarios, optimizando la organización y administración del parqueadero universitario.</p>
 </div>
 
-<!-- Contenedor principal de contenido -->
 <main>
-  <!-- Contenedor para la imagen animada -->
-  <div class="gif-container">
-    <!-- Imagen animada que representa un parqueadero -->
-    <img src="https://i.pinimg.com/originals/47/a0/cd/47a0cd0161a992d68310a1f2be256aec.gif" alt="Gif de parqueadero">
+  <!-- Contenedor para el contenido principal (texto e imagen) -->
+  <div class="main-container">
+    <!-- Texto descriptivo -->
+    <div class="description">
+      <h2>Nuestro Parqueadero</h2>
+      <p>
+        La Universidad Politécnica Salesiana (UPS) gestiona un parqueadero que 
+        refleja estándares empresariales de alta calidad, ofreciendo una solución 
+        integral a estudiantes, docentes y visitantes. Este espacio no solo se limita 
+        a estacionar vehículos, sino que también garantiza seguridad, comodidad y un 
+        manejo eficiente de los recursos. Nos destacamos por integrar tecnología avanzada 
+        y políticas sostenibles, brindando un servicio que responde a las necesidades 
+        actuales y futuras de nuestra comunidad universitaria.
+      </p>
+      <p>
+        Nuestra misión es consolidarnos como un referente en la gestión de parqueaderos 
+        en el ámbito institucional, promoviendo prácticas responsables y fomentando la 
+        satisfacción de los usuarios. Con una infraestructura moderna y un equipo altamente 
+        capacitado, aseguramos una experiencia de calidad para todos nuestros clientes.
+      </p>
+    </div>
+
+    
+<!-- Contenedor para el carrusel -->
+<div class="carousel">
+  <div class="carousel-images">
+    <img src="https://www.enter.co/wp-content/uploads/2019/07/spot-parking-1-768x432.jpg" alt="Parqueadero 1">
+    <img src="https://backend.vivendo.co/sites/default/files/styles/display_post/public/2020-03/parqueadero.png.jpg?itok=SV2fgGCw" alt="Parqueadero 2">
+    <img src="https://imagenes.eltiempo.com/files/image_1200_600/uploads/2023/08/03/64cc037123a4f.jpeg" alt="Parqueadero 3">
+  </div>
+</div>
+
+
   </div>
 </main>
+
+
+<div class="info-cards">
+  <div class="card">
+    <img src="https://www.shutterstock.com/shutterstock/photos/207226153/display_1500/stock-vector-parking-signal-over-gray-background-vector-illustration-207226153.jpg" alt="Icono de bahías">
+    <p>Espacio para todo tipo de vehiculo</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/?size=100&id=4yxkWmIN0ESC&format=png&color=000000" alt="Icono de transacciones">
+    <p>Rapido ingreso para su facilidad</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/?size=100&id=11168&format=png&color=000000" alt="Icono de usuarios">
+    <p>Usuarios contentos</p>
+  </div>
+</div>
+
+  
+  <div class="formulario">
+    <h2>Solicita tu cotización aquí</h2>
+    <p>Escríbenos y en breve te respondemos</p>
+    <form>
+      <div>
+        <label for="nombre">Nombre*</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre" required />
+      </div>
+      <div>
+        <label for="apellido">Apellido*</label>
+        <input type="text" id="apellido" placeholder="Escribe tu apellido" required />
+      </div>
+      <div>
+        <label for="celular">Celular*</label>
+        <input type="tel" id="celular" placeholder="Ingresa tu celular" required />
+      </div>
+      <div>
+        <label for="pais">País del servicio*</label>
+        <select id="pais" required>
+          <option value="" disabled selected>Selecciona un país</option>
+          <option value="ec">Ecuador</option>
+          <option value="co">Colombia</option>
+          <option value="pe">Perú</option>
+        </select>
+      </div>
+      <div>
+        <label for="email">Email*</label>
+        <input type="email" id="email" placeholder="Ingresa tu email" required />
+      </div>
+      <div>
+        <label for="negocio">Negocio*</label>
+        <select id="negocio" required>
+          <option value="" disabled selected>Elige una opción</option>
+          <option value="1">Negocio 1</option>
+          <option value="2">Negocio 2</option>
+        </select>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" required />
+          He leído y aceptado política de privacidad.
+        </label>
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+  <br/>
+
+
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Sección del logo -->
+    <div class="footer-logo">
+      <img src="https://img.icons8.com/?size=100&id=XypnmNkyfZhP&format=png&color=000000" alt="Logo" class="logo">
+      <p>PARKING-UPS</p>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="footer-contact">
+      <h4>Contáctanos:</h4>
+      <p>+593 96 360 8456</p>
+      <p>+593 98 245 1347 </p>
+    </div>
+
+    <!-- Sección de enlaces -->
+    <div class="footer-links">
+      <h4>¿Quiénes somos?</h4>
+      <ul>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de políticas -->
+    <div class="footer-policies">
+      <h4>Términos y condiciones</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Política y condiciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de redes sociales -->
+    <div class="footer-social">
+      <h4>Síguenos:</h4>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=118467&format=png&color=000000" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram"></a>
+    </div>
+  </div>
+</footer>

@@ -1,3 +1,4 @@
+/* Header */
 header {
   app-home {
     display: block;
@@ -9,7 +10,7 @@ header {
 .header {
   text-align: center;
   padding: 20px;
-  background-color: rgba(0, 51, 102, 0.75); // Fondo azul oscuro con opacidad
+  background-color: rgba(0, 51, 102, 0.75); /* Fondo azul oscuro con opacidad */
   color: #fff;
   border-radius: 10px;
   margin: 20px;
@@ -26,29 +27,233 @@ header {
   }
 }
 
-main {
+/* Contenedor principal (Texto e imagen) */
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 30px;
+  background-color: #f4f4f4; /* Fondo gris claro */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el texto descriptivo */
+.description {
+  flex: 1; /* Ocupa más espacio que el GIF */
+  max-width: 600px; /* Limita el ancho */
+}
+
+.description h2 {
+  font-size: 2em;
+  color: #003366;
+  margin-bottom: 15px;
+}
+
+.description p {
+  font-size: 1.1em;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+/* Contenedor del carrusel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px; /* Ancho máximo del carrusel */
+  height: 600px; /* Altura fija para el carrusel */
+  overflow: hidden;
+  margin: 20px auto; /* Centrado */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de imágenes */
+.carousel-images {
+  display: flex;
+  width: 100%; /* Tres imágenes ocupan el 300% del ancho del carrusel */
+  height: 100%;
+  animation: slide 6s infinite; /* Desliza cada 6 segundos */
+  transition: transform 1s ease; /* Suaviza el cambio de imagen */
+}
+
+/* Estilo para cada imagen */
+.carousel-images img {
+  width: 100%; /* Cada imagen ocupa el 100% del ancho */
+  height: 100%; /* Ocupa toda la altura del contenedor */
+  object-fit: cover; /* Asegura que las imágenes se ajusten sin distorsión */
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  33.33% { transform: translateX(-100%); }
+  66.66% { transform: translateX(-200%); }
+  100% { transform: translateX(0); }
+}
+
+
+
+
+/* Formulario */
+.formulario {
+  flex: 10;
+  background-color: #f9f9f9;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 450px; /* Formulario más angosto */
+  margin: 0 auto; /* Centrado */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form label {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+form input,
+form select {
+  width: 450px ;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background-color: #e94256;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:hover {
+  background-color: #d73545;
+}
+
+/* Tarjetas dinámicas y centradas */
+.info-cards {
+  display: flex;
+  justify-content: center; /* Centrar tarjetas */
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card {
+  background-color: #fff;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Transición para el efecto dinámico */
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Elevar la tarjeta al pasar el cursor */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.card img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.card h2 {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+  border-top: 1px solid #e94256;
+  margin-top: 15px;
+  padding-top: 10px;
+}
+
+/* Footer */
+.footer {
+  background-color: #4253e9;
+  color: white;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 120px);
-  padding: 10px; // Reducir el padding en el main para acercar más el GIF
+  text-align: center;
+}
 
-  .gif-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -15px; // Margen negativo para elevar aún más el GIF
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.8); // Fondo blanco suave con opacidad
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
 
-    img {
-      width: 200px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
-  }
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

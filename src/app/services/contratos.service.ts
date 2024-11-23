@@ -18,7 +18,6 @@ export class ContratosService {
    * @returns Devuelve una promesa con los documentos de la colección 'contratos' en Firestore.
    */
   getContratos() {
-    // Se obtiene la colección 'contratos' y se consulta todos sus documentos.
     return getDocs(query(collection(this.firestore, this.collectionName)));
   }
 
@@ -62,4 +61,6 @@ export class ContratosService {
     const contratosCollection = collection(this.firestore, this.collectionName);
     return collectionData(contratosCollection) as Observable<any[]>;
   }
+
+  
 }
