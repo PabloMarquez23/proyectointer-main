@@ -70,3 +70,6 @@ export class ContratosComponent implements OnInit {
     });
   }
 }
+  
+  
+
