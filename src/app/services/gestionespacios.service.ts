@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';  // Importa el decorador Injectable para que este servicio pueda ser inyectado en otros componentes o servicios.
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';  // Importa las funciones necesarias de Firebase Firestore para interactuar con la base de datos.
-import { GestionEspacios } from '../domain/gestionespacios';  // Importa el tipo de dato GestionEspacios, que representa los datos de cada espacio gestionado.
-import { map, Observable } from 'rxjs';  // Importa funciones de RxJS para manejar flujos de datos reactivos.
+import { Injectable } from '@angular/core';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';
+import { GestionEspacios } from '../domain/gestionespacios';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Contratos } from '../domain/contratos';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'  // Declara que este servicio estará disponible globalmente en la aplicación.
@@ -12,22 +14,14 @@ export class GestionEspaciosService {
 
   constructor(private firestore: Firestore) {}
 
-  // Obtener los espacios
-  getEspacios() {
-    return getDocs(query(collection(this.firestore, this.collectionName)));
+  async getEspacios() {
+    const espaciosRef = collection(this.firestore, 'espacios');
+    const snapshot = await getDocs(espaciosRef);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as unknown as GestionEspacios[];
   }
 
-  // Añadir un nuevo espacio
-  addEspacio(espacio: GestionEspacios) {
-    return addDoc(collection(this.firestore, this.collectionName), { ...espacio });
-  }
-
-  deleteEspacio(id: string) {
-    return deleteDoc(doc(this.firestore, this.collectionName, id));
-  }
-  
-  // Obtiene la referencia de la colección
-  getEspaciosCollection(): Observable<GestionEspacios[]> {
-    return collectionData(collection(this.firestore, this.collectionName), { idField: 'id' }) as Observable<GestionEspacios[]>;
+  async actualizarEstadoEspacio(id: string, nuevoEstado: Partial<GestionEspacios>) {
+    const espacioDocRef = doc(this.firestore, `espacios/${id}`);
+    await updateDoc(espacioDocRef, nuevoEstado);
   }
 }

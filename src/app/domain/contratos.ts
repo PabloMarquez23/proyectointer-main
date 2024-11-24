@@ -1,4 +1,6 @@
 export interface Contratos {
+  
+  
   id?: string;
   cliente: string;
   placa: string;

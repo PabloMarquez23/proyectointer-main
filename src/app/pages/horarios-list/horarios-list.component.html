@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="page-container">
   <!-- Contenido principal -->
   <div class="content">
@@ -38,6 +39,48 @@
         <button [routerLink]="['/horarios']" class="btn-primario">Regresar</button>
       </div>
     </div>
+=======
+<div class="contenedor-principal">
+  <!-- Contenedor principal del listado de horarios -->
+  <div class="contenedor">
+    <!-- Título centrado para la sección -->
+    <h2 class="centrar-texto mb-4">Listado de Horarios</h2>
+
+    <!-- Lista de horarios generada dinámicamente -->
+    <ul>
+      <!-- Iteración sobre la lista de horarios utilizando *ngFor -->
+      <li *ngFor="let horario of horarios; trackBy: trackById" class="grupo-form mb-4">
+        <!-- Grupo de formulario para cada horario -->
+        <div>
+          <!-- Muestra el día actual y campo editable para el día -->
+          <strong>Día:</strong> {{ horario.dia }}
+          <input type="text" [(ngModel)]="horario.dia" placeholder="Editar día" class="campo-formulario">
+        </div>
+    
+        <div>
+          <!-- Muestra la hora de inicio actual y campo editable para la hora de inicio -->
+          <strong>Hora de Inicio:</strong> {{ horario.horainicio }}
+          <input type="time" [(ngModel)]="horario.horainicio" placeholder="Editar hora de inicio" class="campo-formulario">
+        </div>
+    
+        <div>
+          <!-- Muestra la hora de fin actual y campo editable para la hora de fin -->
+          <strong>Hora de Fin:</strong> {{ horario.horafin }}
+          <input type="time" [(ngModel)]="horario.horafin" placeholder="Editar hora de fin" class="campo-formulario">
+        </div>
+    
+        <!-- Botón para actualizar el horario -->
+        <button (click)="actualizarHorario(horario)" class="btn-primario">Actualizar</button>
+        <!-- Botón para eliminar el horario -->
+        <button (click)="eliminarHorario(horario.id)" class="btn-primario">Eliminar</button>
+        <!-- Separador visual -->
+        <hr>
+      </li>
+    </ul>
+  
+    <!-- Botón para regresar a la página de agregar horarios -->
+    <button [routerLink]="['/horarios']" class="btn-primario">Regresar</button>
+>>>>>>> c0ed5a2a9784a4c1eaf1dd6be5551f9b478ef419
   </div>
   <br />
   <footer class="footer">

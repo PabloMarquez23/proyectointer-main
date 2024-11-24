@@ -1,3 +1,10 @@
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -7,14 +14,14 @@ body {
   background-color: #f0f0f0;
 }
 
-// Contenedor principal
+/* Contenedor principal */
 .contenedor-principal {
-  flex: 1; /* Permite que el contenido principal se expanda */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 900px;
+  width: 800px;
   max-width: 1200px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -23,29 +30,54 @@ body {
   margin: 20px auto;
 }
 
-// Contenedor interior
+/* Contenedor interior */
 .contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 800px;
   text-align: center;
-  margin-bottom: 400px;
+  margin-bottom: 20px; /* Ajustado para mayor consistencia */
 }
 
+.tarjeta {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+h2.centrar-texto {
+  margin-bottom: 30px;
+}
+
+/* Grupo de formulario */
 .grupo-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   margin-bottom: 20px;
+  text-align: left;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.grupo-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
 }
 
 .grupo-form input,
 .grupo-form select {
-  width: 100%;
-  padding: 10px;
+  width: 100%; /* Asegura que todos los inputs ocupen el ancho completo */
+  padding: 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
 
 .grupo-form input:focus,
@@ -54,63 +86,61 @@ body {
   outline: none;
 }
 
-h2.centrar-texto {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-// Botones
-.btn-primario,
-.btn-secundario,
-.btn-regresar {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
-
+/* Botones primarios */
 .btn-primario {
-  background-color: #4a90e2;
-}
-
-.btn-secundario {
-  background-color: #f44336;
+  width: 100%;
+  max-width: 850px;
+  background-color: #b04f4f;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 20px;
 }
 
 .btn-primario:hover {
   background-color: #357ab7;
 }
 
-.btn-secundario:hover {
-  background-color: #e53935;
+button[routerLink] {
+  width: 100%;
+  max-width: 850px;
+  background-color: #357ab7;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
-.btn-regresar {
-  background-color: #6c757d;
+button[routerLink]:hover {
+  background-color: #5a8bc2;
 }
 
-.btn-regresar:hover {
-  background-color: #5a6268;
+/* Ajuste para select específico */
+.grupo-form select#estado {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.grupo-form select#estado:focus {
+  border-color: #4a90e2;
+  outline: none;
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid #ddd;
-  margin: 20px 0;
-}
-
+/* Footer */
 .footer {
   background-color: #4253e9;
   color: white;
@@ -119,20 +149,21 @@ hr {
   position: relative;
   bottom: 0;
   left: 0;
-  width: 100vw; /* Asegura que el footer ocupe toda la ventana */
-  margin-top: auto; /* Empuja el footer al final si hay poco contenido */
-  box-sizing: border-box; /* Evita problemas de padding o border */
+  width: 100vw;
+  margin-top: auto;
 }
+
 .footer-container {
-  max-width: 1200px; /* Ajusta este valor según el ancho de tu contenedor principal */
-  margin: 0 auto; /* Centra el contenido */
+  max-width: 1250px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   text-align: left;
-  padding: 0 20px; /* Opcional: añade un margen interno para evitar que el contenido toque los bordes */
+  padding: 0 20px;
 }
+
 .footer-logo {
   display: flex;
   flex-direction: column;

@@ -13,14 +13,19 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./tarifas-list.component.scss']
 })
 export class TarifasListComponent implements OnInit {
-  tarifas: Tarifas[] = [];
+  tarifas: Tarifas[] = []; // Lista de tarifas obtenidas desde el servicio
 
   constructor(private tarifasService: TarifasService) {}
 
   ngOnInit(): void {
+    // Cargar las tarifas al iniciar el componente
     this.obtenerTarifas();
   }
 
+  /**
+   * Método para obtener las tarifas desde el servicio.
+   * Los datos son convertidos en objetos del tipo Tarifas.
+   */
   obtenerTarifas() {
     this.tarifasService.getTarifas().then((querySnapshot) => {
       this.tarifas = querySnapshot.docs.map(doc => {
@@ -30,6 +35,11 @@ export class TarifasListComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para actualizar una tarifa.
+   * Incluye validaciones para los campos antes de realizar la actualización.
+   * @param tarifa - Objeto tarifa que se desea actualizar.
+   */
   actualizarTarifa(tarifa: Tarifas) {
     // Validar que el nombre de la tarifa no contenga números
     const tieneNumeros = /\d/.test(tarifa.nombretarifa);
@@ -59,13 +69,18 @@ export class TarifasListComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para eliminar una tarifa.
+   * Muestra una confirmación antes de proceder con la eliminación.
+   * @param id - ID de la tarifa a eliminar.
+   */
   eliminarTarifa(id: string | undefined) {
     if (id) {
       // Confirmación de eliminación
       const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta tarifa?");
       if (confirmacion) {
         this.tarifasService.deleteTarifa(id).then(() => {
-          this.obtenerTarifas();
+          this.obtenerTarifas(); // Actualizar la lista después de eliminar
           alert("Tarifa eliminada exitosamente.");
         }).catch((error: any) => {
           console.error('Error al eliminar la tarifa:', error);
@@ -76,6 +91,13 @@ export class TarifasListComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para optimizar la renderización de la lista de tarifas.
+   * Se utiliza para rastrear cada elemento con un identificador único.
+   * @param index - Índice del elemento en la lista.
+   * @param tarifa - Objeto tarifa actual.
+   * @returns El ID de la tarifa o el índice como cadena.
+   */
   trackById(index: number, tarifa: Tarifas): string {
     return tarifa.id ? tarifa.id : index.toString();
   }
