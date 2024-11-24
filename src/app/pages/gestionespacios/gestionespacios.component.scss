@@ -1,18 +1,110 @@
+/* CSS actualizado para una presentación profesional */
+
+/* Contenedor principal */
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Mover a la izquierda */
+  margin-left: 50px; /* Ajuste del margen izquierdo */
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 150px;
+  
+}
+
+/* Título */
+.contenedor h2 {
+  font-size: 24px;
+  color: #f8ecec;
+  margin-bottom: 20px;
+}
+
+/* Grupo de formulario */
+.grupo-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.grupo-form label {
+  font-size: 20px;
+  color: #fefefe;
+}
+
+.grupo-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.grupo-form input:focus {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Botones */
+.botones {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.botones button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.botones button:nth-child(1) {
+  background-color: #007bff; /* Azul */
+}
+
+.botones button:nth-child(2) {
+  background-color: #000; /* Negro */
+}
+
+.botones button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.botones button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Vista de espacios */
 .grid-espacios {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(5, 1fr); /* Columnas fijas: 5 */
+  gap: 15px;
+  width: 100%;
 }
 
 .espacio {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  border-radius: 10px;
   cursor: pointer;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .espacio-disponible {
@@ -23,4 +115,87 @@
 .espacio-ocupado {
   background-color: #f44336; /* Rojo */
   color: white;
+}
+
+.espacio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.espacio:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.footer {
+  background-color: #4253e9; /* Fondo azul */
+  color: white;
+  padding: 20px 0;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  position: fixed; /* Fija el footer en la parte inferior */
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.footer-container {
+  max-width: 1200px; /* Ajusta este valor según el ancho de tu contenedor principal */
+  margin: 0 auto; /* Centra el contenido */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px; /* Opcional: añade un margen interno para evitar que el contenido toque los bordes */
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

@@ -7,51 +7,45 @@ body {
   background-color: #f0f0f0;
 }
 
-.contenedor {
+// Contenedor principal
+.contenedor-principal {
+  flex: 1; /* Permite que el contenido principal se expanda */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex-direction: column;
+  width: 900px;
   max-width: 1200px;
   padding: 20px;
-  min-height: 100vh;
-}
-
-.tarjeta {
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 40px 60px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1000px;
-  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
 }
 
-h2.centrar-texto {
-  margin-bottom: 30px;
+// Contenedor interior
+.contenedor {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 400px;
 }
 
 .grupo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 20px;
-  text-align: left;
-}
-
-.grupo-form label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
 }
 
 .grupo-form input,
 .grupo-form select {
-  width: 1000px;
-  padding: 15px;
+  width: 100%;
+  padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
-  transition: border-color 0.3s ease;
 }
 
 .grupo-form input:focus,
@@ -60,55 +54,132 @@ h2.centrar-texto {
   outline: none;
 }
 
-.btn-primario {
+h2.centrar-texto {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+// Botones
+.btn-primario,
+.btn-secundario,
+.btn-regresar {
   width: 100%;
-  max-width: 850px;
-  background-color: #b04f4f;
-  color: #fff;
-  border: none;
-  padding: 15px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
-  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-primario {
+  background-color: #4a90e2;
+}
+
+.btn-secundario {
+  background-color: #f44336;
 }
 
 .btn-primario:hover {
   background-color: #357ab7;
 }
 
-button[routerLink] {
-  width: 100%;
-  max-width: 850px;
-  background-color: #357ab7;
-  color: #fff;
-  border: none;
-  padding: 15px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 15px;
+.btn-secundario:hover {
+  background-color: #e53935;
 }
 
-button[routerLink]:hover {
-  background-color: #5a8bc2;
+.btn-regresar {
+  background-color: #6c757d;
 }
 
-.grupo-form select#estado {
-  width: 100%;
-  max-width: 1000px; /* Reducir ancho solo para este select */
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s ease;
+.btn-regresar:hover {
+  background-color: #5a6268;
 }
 
-.grupo-form select#estado:focus {
-  border-color: #4a90e2;
-  outline: none;
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.footer {
+  background-color: #4253e9;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* Asegura que el footer ocupe toda la ventana */
+  margin-top: auto; /* Empuja el footer al final si hay poco contenido */
+  box-sizing: border-box; /* Evita problemas de padding o border */
+}
+.footer-container {
+  max-width: 1200px; /* Ajusta este valor según el ancho de tu contenedor principal */
+  margin: 0 auto; /* Centra el contenido */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px; /* Opcional: añade un margen interno para evitar que el contenido toque los bordes */
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

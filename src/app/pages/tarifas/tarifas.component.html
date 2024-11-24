@@ -1,13 +1,20 @@
+<!-- Encabezado del sitio -->
 <header>
+  <!-- Componente Angular para el encabezado -->
   <app-home></app-home>
 </header>
-
+<div class="contenedor-principal">
+<!-- Contenedor principal -->
 <div class="contenedor">
+  <!-- Tarjeta para la sección de gestión de tarifas -->
   <div class="tarjeta">
+    <!-- Título de la tarjeta -->
     <h2 class="centrar-texto mb-4">Gestión de Tarifas</h2>
 
+    <!-- Campo para el nombre de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="nombretarifa">Nombre de la Tarifa:</label>
+      <!-- Input para ingresar el nombre de la tarifa, vinculado a la propiedad `nombretarifa` del modelo `nuevaTarifa` -->
       <input 
         type="text" 
         id="nombretarifa" 
@@ -18,8 +25,10 @@
       >
     </div>
 
+    <!-- Campo para el costo de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="costo">Costo:</label>
+      <!-- Input de tipo numérico para ingresar el costo de la tarifa -->
       <input 
         type="number" 
         id="costo" 
@@ -30,8 +39,10 @@
       >
     </div>
 
+    <!-- Campo para la duración de la tarifa -->
     <div class="grupo-form mb-3">
       <label for="duracion">Duración (en días):</label>
+      <!-- Input de tipo numérico para ingresar la duración en días -->
       <input 
         type="number" 
         id="duracion" 
@@ -42,10 +53,55 @@
       >
     </div>
 
+    <!-- Botón para agregar una nueva tarifa -->
     <button (click)="agregarTarifa()" class="btn-primario">Agregar Tarifa</button>
 
     <hr>
 
+    <!-- Botón para navegar al listado de tarifas -->
     <button [routerLink]="['/tarifas-list']" class="btn-primario">Ver Listado de Tarifas</button>
   </div>
 </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Sección del logo -->
+    <div class="footer-logo">
+      <img src="https://img.icons8.com/?size=100&id=XypnmNkyfZhP&format=png&color=000000" alt="Logo" class="logo">
+      <p>PARKING-UPS</p>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="footer-contact">
+      <h4>Contáctanos:</h4>
+      <p>+593 96 360 8456</p>
+      <p>+593 98 245 1347 </p>
+    </div>
+
+    <!-- Sección de enlaces -->
+    <div class="footer-links">
+      <h4>¿Quiénes somos?</h4>
+      <ul>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de políticas -->
+    <div class="footer-policies">
+      <h4>Términos y condiciones</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Política y condiciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de redes sociales -->
+    <div class="footer-social">
+      <h4>Síguenos:</h4>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=118467&format=png&color=000000" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram"></a>
+    </div>
+  </div>
+</footer>

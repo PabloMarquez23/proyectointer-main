@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -7,26 +13,31 @@ body {
   background-color: #f0f0f0;
 }
 
+/* Contenedor principal */
 .contenedor-principal {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo con transparencia */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra para un toque moderno */
-}
-
-.contenedor {
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Asegura que todo esté centrado vertical y horizontalmente */
-  flex-direction: column;
-  width: 100%;
+  width: 800px;
   max-width: 1200px;
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+}
+
+/* Contenedor interior */
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 20px; /* Ajustado para mayor consistencia */
 }
 
 .tarjeta {
@@ -67,7 +78,7 @@ body {
 }
 
 .btn-primario {
-  width: 850px;
+  width: 700px;
   max-width: 1000px;
   background-color: #b04f4f;
   color: #fff;
@@ -145,4 +156,79 @@ hr {
   border: 0;
   border-top: 1px solid #ddd;
   margin: 0px 0;
+}
+
+/* Footer */
+.footer {
+  background-color: #4253e9;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  margin-top: auto;
+}
+
+
+.footer-container {
+  max-width: 1200px; /* Ajusta este valor según el ancho de tu contenedor principal */
+  margin: 0 auto; /* Centra el contenido */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px; /* Opcional: añade un margen interno para evitar que el contenido toque los bordes */
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

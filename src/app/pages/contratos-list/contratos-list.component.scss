@@ -9,6 +9,7 @@ body {
 
 // Contenedor principal
 .contenedor-principal {
+  flex: 1; /* Permite que el contenido principal se expanda */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +20,7 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
 }
 
 // Contenedor interior
@@ -26,6 +28,7 @@ body {
   width: 100%;
   max-width: 800px;
   text-align: center;
+  margin-bottom: 400px;
 }
 
 .grupo-form {
@@ -106,4 +109,77 @@ hr {
   border: 0;
   border-top: 1px solid #ddd;
   margin: 20px 0;
+}
+
+.footer {
+  background-color: #4253e9;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* Asegura que el footer ocupe toda la ventana */
+  margin-top: auto; /* Empuja el footer al final si hay poco contenido */
+  box-sizing: border-box; /* Evita problemas de padding o border */
+}
+.footer-container {
+  max-width: 1200px; /* Ajusta este valor según el ancho de tu contenedor principal */
+  margin: 0 auto; /* Centra el contenido */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px; /* Opcional: añade un margen interno para evitar que el contenido toque los bordes */
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';  // Importa el decorador Injectable para que este servicio pueda ser inyectado en otros componentes o servicios.
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';  // Importa las funciones necesarias de Firebase Firestore para interactuar con la base de datos.
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, query, updateDoc } from '@angular/fire/firestore';  // Importa las funciones necesarias de Firebase Firestore para interactuar con la base de datos.
 import { GestionEspacios } from '../domain/gestionespacios';  // Importa el tipo de dato GestionEspacios, que representa los datos de cada espacio gestionado.
 import { map, Observable } from 'rxjs';  // Importa funciones de RxJS para manejar flujos de datos reactivos.
 
@@ -26,7 +26,8 @@ export class GestionEspaciosService {
     return deleteDoc(doc(this.firestore, this.collectionName, id));
   }
   
-  getEspaciosCollection() {
-    return collection(this.firestore, this.collectionName);
+  // Obtiene la referencia de la colección
+  getEspaciosCollection(): Observable<GestionEspacios[]> {
+    return collectionData(collection(this.firestore, this.collectionName), { idField: 'id' }) as Observable<GestionEspacios[]>;
   }
 }

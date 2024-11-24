@@ -1,42 +1,113 @@
 <header>
+  <!-- Componente principal de la página que contiene información relevante o un menú -->
   <app-home></app-home>
 </header>
 
 <br/>
+<!-- Contenedor principal donde se mostrarán los usuarios -->
+<div class="contenedor-principal">
 <div class="contenedor">
 
+  <!-- Aquí se itera sobre los usuarios usando una sintaxis incorrecta. En Angular debe usarse *ngFor. -->
   @for (user of task; track user.id) {
+    <!-- Cada usuario es mostrado dentro de una tarjeta para su edición -->
     <div class="tarjeta">
+      
+      <!-- Título de la sección de edición de usuarios -->
       <h2 class="centrar-texto mb-4">Editar Usuarios</h2>
+      
+      <!-- Contenedor para los campos de formulario -->
       <div class="form-row">
+        
+        <!-- Campo de formulario para editar el correo electrónico del usuario -->
         <div class="form-container">
           <label for="editar-email-{{user.id}}">Correo Electrónico:</label>
+          <!-- Mostrar el correo electrónico del usuario actual -->
           <li><strong>Email:</strong> {{user.email}}</li>
+          <!-- Input para editar el correo electrónico con enlace bidireccional ngModel -->
           <input type="text" class="campo-formulario" id="editar-email-{{user.id}}"
                  [(ngModel)]="user.email" placeholder="Escribe el correo electrónico...">
         </div>
+
+        <!-- Campo de formulario para editar el apellido del usuario -->
         <div class="form-container">
           <label for="editar-lastname-{{user.id}}">Apellido:</label>
+          <!-- Mostrar el apellido del usuario actual -->
           <li><span><strong>Apellido:</strong> {{user.lastName}}</span></li>
+          <!-- Input para editar el apellido con enlace bidireccional ngModel -->
           <input type="text" class="campo-formulario" id="editar-lastname-{{user.id}}"
                  [(ngModel)]="user.lastName" placeholder="Ingrese el apellido">
         </div>
+
+        <!-- Campo de formulario para editar el nombre del usuario -->
         <div class="form-container">
           <label for="editar-names-{{user.id}}">Nombre:</label>
+          <!-- Mostrar el nombre del usuario actual -->
           <li><span><strong>Nombre:</strong> {{user.names}}</span></li>
+          <!-- Input para editar el nombre con enlace bidireccional ngModel -->
           <input type="text" class="campo-formulario" id="editar-names-{{user.id}}"
                  [(ngModel)]="user.names" placeholder="Ingrese el nombre">
         </div>
+
+        <!-- Campo de formulario para editar el rol del usuario -->
         <div class="form-container">
           <label for="editar-role-{{user.id}}">Rol:</label>
+          <!-- Mostrar el rol actual del usuario -->
           <li><span><strong>Rol:</strong> {{user.role}}</span></li>
+          <!-- Textarea para editar el rol con enlace bidireccional ngModel -->
           <textarea class="campo-formulario" id="editar-role-{{user.id}}" rows="1"
                     [(ngModel)]="user.role" placeholder="Ingrese el rol"></textarea>
         </div>
       </div>
+
+      <!-- Botones para realizar acciones de guardar cambios o eliminar el usuario -->
       <button (click)="editarUsuario(user)" class="btn-primario">Guardar Cambios</button>
+      <!-- Botón para eliminar el usuario, invoca la función 'borrar' pasando el ID del usuario -->
       <button (click)="borrar(user.id)" class="btn-secundario">Eliminar</button>
     </div>
     
   }
 </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Sección del logo -->
+    <div class="footer-logo">
+      <img src="https://img.icons8.com/?size=100&id=XypnmNkyfZhP&format=png&color=000000" alt="Logo" class="logo">
+      <p>PARKING-UPS</p>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="footer-contact">
+      <h4>Contáctanos:</h4>
+      <p>+593 96 360 8456</p>
+      <p>+593 98 245 1347 </p>
+    </div>
+
+    <!-- Sección de enlaces -->
+    <div class="footer-links">
+      <h4>¿Quiénes somos?</h4>
+      <ul>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de políticas -->
+    <div class="footer-policies">
+      <h4>Términos y condiciones</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Política y condiciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de redes sociales -->
+    <div class="footer-social">
+      <h4>Síguenos:</h4>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=118467&format=png&color=000000" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram"></a>
+    </div>
+  </div>
+</footer>

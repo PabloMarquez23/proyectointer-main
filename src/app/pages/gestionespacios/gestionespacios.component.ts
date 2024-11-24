@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./gestionespacios.component.scss'] // Vincula el archivo de estilos CSS
 })
 export class GestionespaciosComponent implements OnInit {
+  numeroEspacio: number | null = null; // Declaración en el componente
   espacios: GestionEspacios[] = []; // Lista de espacios existentes
   contratos: any[] = []; // Lista de contratos cargados
   estadoEspacios: { [key: number]: string } = {}; // Relación espacio-estado (espacio: estado)
@@ -68,49 +69,71 @@ export class GestionespaciosComponent implements OnInit {
 
   // Añadir un nuevo espacio automáticamente
   agregarEspacio() {
-    const ultimoEspacio = this.espacios.length > 0 ? this.espacios[this.espacios.length - 1].espacio : 0;
-    const nuevoEspacio: GestionEspacios = { espacio: ultimoEspacio + 1 };
-
+    if (this.numeroEspacio === null || this.numeroEspacio <= 0) {
+      alert('Por favor ingresa un número válido para el espacio.');
+      return;
+    }
+  
+    // Verifica si el espacio ya existe
+    const espacioExistente = this.espacios.find((e) => e.espacio === this.numeroEspacio);
+    if (espacioExistente) {
+      alert('El espacio ingresado ya existe.');
+      return;
+    }
+  
+    const nuevoEspacio: GestionEspacios = { espacio: this.numeroEspacio };
+  
     this.espaciosService.addEspacio(nuevoEspacio).then(() => {
-      alert('Espacio añadido correctamente');
-      this.obtenerEspacios(); // Actualizar la lista
+      alert(`El espacio ${this.numeroEspacio} fue añadido correctamente.`);
+      this.numeroEspacio = null; // Limpia el campo de entrada
+      this.obtenerEspacios(); // Actualiza la lista
     });
   }
-
   // Eliminar un espacio si no está vinculado a ningún contrato
-eliminarEspacio() {
-  if (this.espacioSeleccionado === null) {
-    alert('Por favor selecciona un espacio para eliminar.');
-    return;
+  eliminarEspacio() {
+    if (this.numeroEspacio === null) {
+      alert('Por favor ingresa un número válido para el espacio.');
+      return;
+    }
+  
+    // Verificar si el espacio está vinculado a un contrato
+    const espacioEnContrato = this.contratos.some(
+      (contrato) => contrato.numeroespacio === String(this.numeroEspacio)
+    );
+  
+    if (espacioEnContrato) {
+      alert('No se puede eliminar este espacio porque está vinculado a un contrato.');
+      return;
+    }
+  
+    // Obtener el espacio por su número
+    const espacio = this.espacios.find((e) => e.espacio === this.numeroEspacio);
+  
+    if (espacio?.id) {
+      this.espaciosService
+        .deleteEspacio(espacio.id) // Eliminar en Firestore usando el ID correcto
+        .then(() => {
+          alert(`El espacio ${this.numeroEspacio} fue eliminado correctamente.`);
+          this.numeroEspacio = null; // Limpia el campo de entrada
+          this.obtenerEspacios(); // Actualiza la lista
+        })
+        .catch((error) => {
+          console.error('Error al eliminar el espacio:', error);
+          alert('Ocurrió un error al intentar eliminar el espacio. Intenta de nuevo.');
+        });
+    } else {
+      alert('No se encontró el espacio ingresado. Verifica la entrada.');
+    }
   }
 
-  // Verificar si el espacio está vinculado a algún contrato
-  const espacioEnContrato = this.contratos.some(
-    (contrato) => contrato.numeroespacio === String(this.espacioSeleccionado)
-  );
-
-  if (espacioEnContrato) {
-    alert('No se puede eliminar este espacio porque está vinculado a un contrato.');
-    return;
+  cargarContratoEspacio(numeroEspacio: number) {
+    const contrato = this.contratos.find((c) => c.numeroespacio === String(numeroEspacio));
+    if (contrato) {
+      alert(`Espacio ${numeroEspacio} ocupado por: ${contrato.cliente}`);
+    } else {
+      alert(`Espacio ${numeroEspacio} está disponible.`);
+    }
   }
-
-  // Obtener el espacio por su número
-  const espacio = this.espacios.find((e) => e.espacio === this.espacioSeleccionado);
-
-  if (espacio?.id) {
-    this.espaciosService
-      .deleteEspacio(espacio.id) // Eliminar en Firestore usando el ID correcto
-      .then(() => {
-        alert(`El espacio ${this.espacioSeleccionado} fue eliminado correctamente.`);
-        this.espacioSeleccionado = null; // Reiniciar la selección
-        this.obtenerEspacios(); // Actualizar la lista
-      })
-      .catch((error) => {
-        console.error('Error al eliminar el espacio:', error);
-        alert('Ocurrió un error al intentar eliminar el espacio. Intenta de nuevo.');
-      });
-  } else {
-    alert('No se encontró el espacio seleccionado. Verifica la selección.');
-  }
-}
+  
+  
 }
