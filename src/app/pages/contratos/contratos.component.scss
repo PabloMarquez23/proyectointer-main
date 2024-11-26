@@ -1,3 +1,10 @@
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -7,14 +14,31 @@ body {
   background-color: #f0f0f0;
 }
 
-.contenedor {
+/* Contenedor principal */
+.contenedor-principal {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex-direction: column;
+  width: 800px;
   max-width: 1200px;
   padding: 20px;
-  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+}
+
+/* Contenedor interior */
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 20px; /* Ajustado para mayor consistencia */
 }
 
 .tarjeta {
@@ -31,9 +55,11 @@ h2.centrar-texto {
   margin-bottom: 30px;
 }
 
+/* Grupo de formulario */
 .grupo-form {
   margin-bottom: 20px;
   text-align: left;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
 
 .grupo-form label {
@@ -45,7 +71,7 @@ h2.centrar-texto {
 
 .grupo-form input,
 .grupo-form select {
-  width: 1000px;
+  width: 100%; /* Asegura que todos los inputs ocupen el ancho completo */
   padding: 15px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -60,6 +86,7 @@ h2.centrar-texto {
   outline: none;
 }
 
+/* Botones primarios */
 .btn-primario {
   width: 100%;
   max-width: 850px;
@@ -97,9 +124,9 @@ button[routerLink]:hover {
   background-color: #5a8bc2;
 }
 
+/* Ajuste para select específico */
 .grupo-form select#estado {
   width: 100%;
-  max-width: 1000px; /* Reducir ancho solo para este select */
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -111,4 +138,79 @@ button[routerLink]:hover {
 .grupo-form select#estado:focus {
   border-color: #4a90e2;
   outline: none;
+}
+
+/* Footer */
+.footer {
+  background-color: #4253e9;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.footer-contact,
+.footer-links,
+.footer-policies,
+.footer-social {
+  margin: 10px 20px;
+}
+
+.footer-links ul,
+.footer-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-policies li {
+  margin: 5px 0;
+}
+
+.footer-links a,
+.footer-policies a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover,
+.footer-policies a:hover {
+  text-decoration: underline;
 }

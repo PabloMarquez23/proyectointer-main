@@ -56,11 +56,9 @@ export class ContratosService {
    * Obtiene todos los contratos como un flujo observable, conectado a la gestión de espacios.
    * @returns Devuelve un Observable con todos los contratos de la colección 'contratos'.
    */
-  obtenerContratos(): Observable<any[]> {
-    // Crea una referencia a la colección 'contratos' y devuelve sus datos como un Observable.
-    const contratosCollection = collection(this.firestore, this.collectionName);
-    return collectionData(contratosCollection) as Observable<any[]>;
-  }
+ 
 
-  
+  obtenerContratos(): Observable<Contratos[]> {
+    return collectionData(collection(this.firestore, this.collectionName), { idField: 'id' }) as Observable<Contratos[]>;
+  }
 }

@@ -2,12 +2,14 @@
   <app-home></app-home>
 </header>
 
+<div class="contenedor-principal">
 <div class="contenedor">
   <h2 class="centrar-texto mb-4"></h2>
 
   <div class="tarjeta">
     <div class="form-row">
       <div class="form-container">
+        <h2 class="centrar-texto mb-4">Actualizar Perfil</h2>
         <label for="editar-email">Correo Electrónico:</label>
         <li><strong>Email:</strong> {{usuario.email}}</li>
         <input type="text" class="campo-formulario" id="editar-email" placeholder="Escribe el correo electrónico..." [(ngModel)]="usuario.email">
@@ -34,3 +36,47 @@
     <button (click)="guardar()" class="btn-primario">Guardar Cambios</button>
   </div>
 </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Sección del logo -->
+    <div class="footer-logo">
+      <img src="https://img.icons8.com/?size=100&id=XypnmNkyfZhP&format=png&color=000000" alt="Logo" class="logo">
+      <p>PARKING-UPS</p>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="footer-contact">
+      <h4>Contáctanos:</h4>
+      <p>+593 96 360 8456</p>
+      <p>+593 98 245 1347 </p>
+    </div>
+
+    <!-- Sección de enlaces -->
+    <div class="footer-links">
+      <h4>¿Quiénes somos?</h4>
+      <ul>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de políticas -->
+    <div class="footer-policies">
+      <h4>Términos y condiciones</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Política y condiciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Sección de redes sociales -->
+    <div class="footer-social">
+      <h4>Síguenos:</h4>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=118467&format=png&color=000000" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram"></a>
+    </div>
+  </div>
+</footer>
